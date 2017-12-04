@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BestCoin</string>
+    <string name="app_name_2">Best Coin</string>
+
+    <!-- Content Descriptions -->
+    <string name="splash_screen_icon_holder">splash-screen-icon-holder</string>
+    <string name="card_view_image_holder">card_view_image_holder</string>
+    <string name="toolbar_layout_image_holder">toolbar_layout_image_holder</string>
+
+    <!-- Drawer Items -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_items_1">Coin List</string>
+    <string name="drawer_items_2">Price</string>
+    <string name="drawer_items_3">Price Historical</string>
+    <string name="drawer_items_4">Coin Snapshot</string>
+
+    <!-- Fragment Names -->
+    <string name="fragment_coin_list">Coin List</string>
+
+</resources>
