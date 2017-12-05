@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.mobilemovement.bestcoin.BuildConfig;
 import com.mobilemovement.bestcoin.coinlist.adapter.CoinListAdapter;
 import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
+import com.mobilemovement.bestcoin.coinlist.model.CoinListUpperModel;
+import com.mobilemovement.bestcoin.network.BestCoinAPI;
 
 import java.util.List;
 
@@ -20,9 +22,9 @@ import rx.schedulers.Schedulers;
  * Created by nuhkoca on 4.12.2017.
  */
 
-public class FetchData {
+public class FetchCoinList {
 
-    public void fetchCoins(final CoinListAdapter mCoinListAdapter) {
+    public static void fetchCoins(final CoinListAdapter coinListAdapter) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -33,13 +35,13 @@ public class FetchData {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        CoinListAPI coinListAPI = retrofit.create(CoinListAPI.class);
+        BestCoinAPI bestCoinAPI = retrofit.create(BestCoinAPI.class);
 
-        Observable<List<CoinListDataModel>> getCoinList = coinListAPI.loadCoins();
+        Observable<CoinListUpperModel> getCoinList = bestCoinAPI.loadCoins();
 
         getCoinList.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<CoinListDataModel>>() {
+                .subscribe(new Subscriber<CoinListUpperModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -51,8 +53,8 @@ public class FetchData {
                     }
 
                     @Override
-                    public void onNext(List<CoinListDataModel> coinListDataModels) {
-                        mCoinListAdapter.updateRecyclerview(coinListDataModels);
+                    public void onNext(CoinListUpperModel coinListUpperModel) {
+                        coinListAdapter.updateRecyclerview(coinListUpperModel.getCoinListDataModels());
                     }
                 });
     }

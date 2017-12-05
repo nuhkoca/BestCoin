@@ -14,7 +14,7 @@ import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
 import com.mobilemovement.bestcoin.coinlist.adapter.CoinListAdapter;
 import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
-import com.mobilemovement.bestcoin.coinlist.network.FetchData;
+import com.mobilemovement.bestcoin.coinlist.network.FetchCoinList;
 import com.mobilemovement.bestcoin.databinding.FragmentCoinListBinding;
 
 import java.util.ArrayList;
@@ -37,8 +37,7 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
         CoinListAdapter mCoinListAdapter = new CoinListAdapter(coinListDataModels, getActivity());
         fragmentDataBinding.rvCoinList.setAdapter(mCoinListAdapter);
 
-        FetchData fetchData = new FetchData();
-        fetchData.fetchCoins(mCoinListAdapter);
+        FetchCoinList.fetchCoins(mCoinListAdapter);
 
         return fragmentDataBinding.getRoot();
     }
