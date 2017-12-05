@@ -51,7 +51,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
         return mCoinListDataModels.size();
     }
 
-    public void updateRecyclerview(List<CoinListDataModel> coinListDataModel) {
+    public void swapData(List<CoinListDataModel> coinListDataModel) {
         mCoinListDataModels = coinListDataModel;
         notifyDataSetChanged();
     }
