@@ -1,14 +1,12 @@
 package com.mobilemovement.bestcoin.coinlist.model;
 
-import android.databinding.BaseObservable;
-
 import java.util.List;
 
 /**
  * Created by nuhkoca on 4.12.2017.
  */
 
-public class CoinListUpperModel extends BaseObservable {
+public class CoinListUpperModel {
     private String response;
     private String baseImageURL;
     private List<CoinListDataModel> coinListDataModels;

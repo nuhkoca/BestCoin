@@ -41,9 +41,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CoinListDataModel coinListDataModel = mCoinListDataModels.get(position);
 
-        holder.bindView(coinListDataModel);
     }
 
     @Override
@@ -63,10 +61,13 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
             coinListItemCardViewBinding = DataBindingUtil.bind(itemView);
-        }
 
-        void bindView(CoinListDataModel coinListDataModel) {
-            coinListItemCardViewBinding.setCoinlistmodel(coinListDataModel);
+            coinListItemCardViewBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 }

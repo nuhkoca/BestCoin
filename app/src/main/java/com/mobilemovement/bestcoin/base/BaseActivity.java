@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.coinlist.CoinListFragment;
@@ -37,6 +39,8 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
         mDrawerLayout = drawerLayout;
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        makeStatusBarTransparent();
     }
 
 
@@ -87,5 +91,10 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
         mDrawerLayout.closeDrawers();
+    }
+
+    private void makeStatusBarTransparent(){
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }

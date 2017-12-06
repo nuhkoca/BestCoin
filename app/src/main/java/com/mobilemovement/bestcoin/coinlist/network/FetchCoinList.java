@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
 
 public class FetchCoinList {
 
-    public static void fetchCoins(final CoinListAdapter coinListAdapter, final Context context) {
+    public static synchronized void fetchCoins(final CoinListAdapter coinListAdapter, final Context context) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();

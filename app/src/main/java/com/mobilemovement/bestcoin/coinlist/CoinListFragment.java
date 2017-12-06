@@ -13,20 +13,13 @@ import android.view.ViewGroup;
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
 import com.mobilemovement.bestcoin.coinlist.adapter.CoinListAdapter;
-import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
-import com.mobilemovement.bestcoin.coinlist.model.CoinListUpperModel;
 import com.mobilemovement.bestcoin.coinlist.network.FetchCoinList;
 import com.mobilemovement.bestcoin.databinding.FragmentCoinListBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
-
-    private CoinListUpperModel coinListDataModels;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,9 +28,9 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
         fragmentDataBinding.rvCoinList.setHasFixedSize(true);
         fragmentDataBinding.rvCoinList.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
-        CoinListAdapter mCoinListAdapter = new CoinListAdapter(coinListDataModels.getCoinListDataModels(), getActivity());
-        fragmentDataBinding.rvCoinList.setAdapter(mCoinListAdapter);
+        CoinListAdapter mCoinListAdapter = new CoinListAdapter(null, getActivity());
 
+        fragmentDataBinding.rvCoinList.setAdapter(mCoinListAdapter);
         FetchCoinList.fetchCoins(mCoinListAdapter, getActivity());
 
         return fragmentDataBinding.getRoot();
