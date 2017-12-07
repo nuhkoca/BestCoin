@@ -8,14 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
     <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>
         <item name="color">@color/colorWhite</item>
     </style>
-
-    <style name="TextComponent"/>
 
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
     <style name="CollapsingTextAppearance.Inverse" >
@@ -28,11 +27,5 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">?colorAccent</item>
     </style>
-
-    <style name="TextComponent.ItemRow">
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:minHeight">48dp</item>
-    </style>
-
 
 </resources>

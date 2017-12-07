@@ -10,42 +10,40 @@ import com.android.databinding.library.baseAdapters.BR;
  */
 
 public class CoinListDataModel extends BaseObservable {
-    private String url;
+    private String code;
     private String name;
-    private String symbol;
-    private String coinName;
-    private String fullName;
-    private String algorith;
-    private String proofType;
-    private String fullyPremined;
-    private String totalCoinSupply;
-    private String preMinedValue;
-    private String totalCoinsFreeFloat;
-    private String sponsored;
+    private Integer minConfirmations;
+    private Boolean isCrypto;
+    private String minimalAmount;
+    private Boolean isBaseOfEnabledPair;
+    private Boolean isQuoteOfEnabledPair;
+    private Boolean hasEnabledPairs;
+    private Boolean isBaseOfEnabledPairForTest;
+    private Boolean isQuoteOfEnabledPairForTest;
+    private Boolean hasEnabledPairsForTest;
 
-    public CoinListDataModel(String url, String name, String symbol, String coinName, String fullName, String algorith, String proofType, String fullyPremined, String totalCoinSupply, String preMinedValue, String totalCoinsFreeFloat, String sponsored) {
-        this.url = url;
+    public CoinListDataModel(String code, String name, Integer minConfirmations, Boolean isCrypto, String minimalAmount, Boolean isBaseOfEnabledPair, Boolean isQuoteOfEnabledPair, Boolean hasEnabledPairs, Boolean isBaseOfEnabledPairForTest, Boolean isQuoteOfEnabledPairForTest, Boolean hasEnabledPairsForTest) {
+        this.code = code;
         this.name = name;
-        this.symbol = symbol;
-        this.coinName = coinName;
-        this.fullName = fullName;
-        this.algorith = algorith;
-        this.proofType = proofType;
-        this.fullyPremined = fullyPremined;
-        this.totalCoinSupply = totalCoinSupply;
-        this.preMinedValue = preMinedValue;
-        this.totalCoinsFreeFloat = totalCoinsFreeFloat;
-        this.sponsored = sponsored;
+        this.minConfirmations = minConfirmations;
+        this.isCrypto = isCrypto;
+        this.minimalAmount = minimalAmount;
+        this.isBaseOfEnabledPair = isBaseOfEnabledPair;
+        this.isQuoteOfEnabledPair = isQuoteOfEnabledPair;
+        this.hasEnabledPairs = hasEnabledPairs;
+        this.isBaseOfEnabledPairForTest = isBaseOfEnabledPairForTest;
+        this.isQuoteOfEnabledPairForTest = isQuoteOfEnabledPairForTest;
+        this.hasEnabledPairsForTest = hasEnabledPairsForTest;
     }
 
     @Bindable
-    public String getUrl() {
-        return url;
+    public String getCode() {
+        return code;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-        notifyPropertyChanged(BR.url);
+    public void setCode(String code) {
+        this.code = code;
+        notifyPropertyChanged(BR.code);
     }
 
     @Bindable
@@ -56,105 +54,96 @@ public class CoinListDataModel extends BaseObservable {
     public void setName(String name) {
         this.name = name;
         notifyPropertyChanged(BR.name);
+
     }
 
     @Bindable
-    public String getSymbol() {
-        return symbol;
+    public Integer getMinConfirmations() {
+        return minConfirmations;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-        notifyPropertyChanged(BR.symbol);
-    }
-
-    @Bindable
-    public String getCoinName() {
-        return coinName;
-    }
-
-    public void setCoinName(String coinName) {
-        this.coinName = coinName;
-        notifyPropertyChanged(BR.coinName);
+    public void setMinConfirmations(Integer minConfirmations) {
+        this.minConfirmations = minConfirmations;
+        notifyPropertyChanged(BR.minConfirmations);
     }
 
     @Bindable
-    public String getFullName() {
-        return fullName;
+    public Boolean getCrypto() {
+        return isCrypto;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-        notifyPropertyChanged(BR.fullName);
-    }
-
-    @Bindable
-    public String getAlgorith() {
-        return algorith;
-    }
-
-    public void setAlgorith(String algorith) {
-        this.algorith = algorith;
-        notifyPropertyChanged(BR.algorith);
+    public void setCrypto(Boolean crypto) {
+        isCrypto = crypto;
+        notifyPropertyChanged(BR.crypto);
     }
 
     @Bindable
-    public String getProofType() {
-        return proofType;
+    public String getMinimalAmount() {
+        return minimalAmount;
     }
 
-    public void setProofType(String proofType) {
-        this.proofType = proofType;
-        notifyPropertyChanged(BR.proofType);
-    }
-
-    @Bindable
-    public String getFullyPremined() {
-        return fullyPremined;
-    }
-
-    public void setFullyPremined(String fullyPremined) {
-        this.fullyPremined = fullyPremined;
-        notifyPropertyChanged(BR.fullyPremined);
+    public void setMinimalAmount(String minimalAmount) {
+        this.minimalAmount = minimalAmount;
+        notifyPropertyChanged(BR.minimalAmount);
     }
 
     @Bindable
-    public String getTotalCoinSupply() {
-        return totalCoinSupply;
+    public Boolean getBaseOfEnabledPair() {
+        return isBaseOfEnabledPair;
     }
 
-    public void setTotalCoinSupply(String totalCoinSupply) {
-        this.totalCoinSupply = totalCoinSupply;
-        notifyPropertyChanged(BR.totalCoinSupply);
-    }
-
-    @Bindable
-    public String getPreMinedValue() {
-        return preMinedValue;
-    }
-
-    public void setPreMinedValue(String preMinedValue) {
-        this.preMinedValue = preMinedValue;
-        notifyPropertyChanged(BR.preMinedValue);
+    public void setBaseOfEnabledPair(Boolean baseOfEnabledPair) {
+        isBaseOfEnabledPair = baseOfEnabledPair;
+        notifyPropertyChanged(BR.baseOfEnabledPair);
     }
 
     @Bindable
-    public String getTotalCoinsFreeFloat() {
-        return totalCoinsFreeFloat;
+    public Boolean getQuoteOfEnabledPair() {
+        return isQuoteOfEnabledPair;
     }
 
-    public void setTotalCoinsFreeFloat(String totalCoinsFreeFloat) {
-        this.totalCoinsFreeFloat = totalCoinsFreeFloat;
-        notifyPropertyChanged(BR.totalCoinsFreeFloat);
+    public void setQuoteOfEnabledPair(Boolean quoteOfEnabledPair) {
+        isQuoteOfEnabledPair = quoteOfEnabledPair;
+        notifyPropertyChanged(BR.quoteOfEnabledPair);
     }
 
     @Bindable
-    public String getSponsored() {
-        return sponsored;
+    public Boolean getHasEnabledPairs() {
+        return hasEnabledPairs;
     }
 
-    public void setSponsored(String sponsored) {
-        this.sponsored = sponsored;
-        notifyPropertyChanged(BR.sponsored);
+    public void setHasEnabledPairs(Boolean hasEnabledPairs) {
+        this.hasEnabledPairs = hasEnabledPairs;
+        notifyPropertyChanged(BR.hasEnabledPairs);
+    }
+
+    @Bindable
+    public Boolean getBaseOfEnabledPairForTest() {
+        return isBaseOfEnabledPairForTest;
+    }
+
+    public void setBaseOfEnabledPairForTest(Boolean baseOfEnabledPairForTest) {
+        isBaseOfEnabledPairForTest = baseOfEnabledPairForTest;
+        notifyPropertyChanged(BR.baseOfEnabledPairForTest);
+    }
+
+    @Bindable
+    public Boolean getQuoteOfEnabledPairForTest() {
+        return isQuoteOfEnabledPairForTest;
+    }
+
+    public void setQuoteOfEnabledPairForTest(Boolean quoteOfEnabledPairForTest) {
+        isQuoteOfEnabledPairForTest = quoteOfEnabledPairForTest;
+        notifyPropertyChanged(BR.quoteOfEnabledPairForTest);
+    }
+
+    @Bindable
+    public Boolean getHasEnabledPairsForTest() {
+        return hasEnabledPairsForTest;
+    }
+
+    public void setHasEnabledPairsForTest(Boolean hasEnabledPairsForTest) {
+        this.hasEnabledPairsForTest = hasEnabledPairsForTest;
+        notifyPropertyChanged(BR.hasEnabledPairsForTest);
     }
 }

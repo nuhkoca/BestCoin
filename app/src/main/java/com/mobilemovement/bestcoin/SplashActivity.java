@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.mobilemovement.bestcoin.utils.TransparentMaker;
+
 public class SplashActivity extends AppCompatActivity {
 
     private static final long DELAY_IN_SECONDS = 1500;
@@ -14,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        TransparentMaker.makeStatusBarTransparent(this);
         initMainActivity();
     }
 

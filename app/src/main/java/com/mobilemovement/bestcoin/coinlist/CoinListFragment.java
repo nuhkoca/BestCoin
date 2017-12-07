@@ -28,10 +28,7 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
         fragmentDataBinding.rvCoinList.setHasFixedSize(true);
         fragmentDataBinding.rvCoinList.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
-        CoinListAdapter mCoinListAdapter = new CoinListAdapter(null, getActivity());
-
-        fragmentDataBinding.rvCoinList.setAdapter(mCoinListAdapter);
-        FetchCoinList.fetchCoins(mCoinListAdapter, getActivity());
+        FetchCoinList.fetchCoins(fragmentDataBinding.rvCoinList, getActivity());
 
         return fragmentDataBinding.getRoot();
     }

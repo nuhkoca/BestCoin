@@ -1,6 +1,6 @@
 <layout>
     <data>
-        <variable name="coinlistmodel" type="com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel"/>
+        <variable name="coinListModel" type="com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel"/>
     </data>
 
 <LinearLayout
@@ -31,7 +31,6 @@
             android:layout_width="145dp"
             android:layout_height="145dp"
             android:scaleType="centerCrop"
-            android:src="@{coinlistmodel.url}"
             android:contentDescription="@string/card_view_image_holder" />
 
         <TextView
@@ -42,7 +41,7 @@
             android:textSize="16sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{coinlistmodel.coinName}"  />
+            android:text="@{coinListModel.name}"  />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
