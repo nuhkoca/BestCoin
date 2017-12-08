@@ -1,4 +1,4 @@
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="coinListModel" type="com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel"/>
     </data>
@@ -27,11 +27,11 @@
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 
-        <ImageView
+        <!-- <ImageView
             android:layout_width="145dp"
             android:layout_height="145dp"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/card_view_image_holder" />
+            android:contentDescription="@string/card_view_image_holder" /> -->
 
         <TextView
             android:id="@+id/tv_coin_name"

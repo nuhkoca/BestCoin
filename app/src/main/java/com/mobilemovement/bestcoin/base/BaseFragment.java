@@ -3,7 +3,7 @@ package com.mobilemovement.bestcoin.base;
 
 import android.databinding.ViewDataBinding;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
+import android.support.v7.widget.RecyclerView;
 
 
 /**
@@ -12,7 +12,16 @@ import android.widget.TextView;
 public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
 
     protected B fragmentDataBinding;
+    protected RecyclerView mRecyclerView;
 
-    protected void initUI(TextView textBase) {
+    protected void initUI(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, boolean setHasFixed, RecyclerView.Adapter adapter) {
+        mRecyclerView = recyclerView;
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        if (setHasFixed)
+            mRecyclerView.setHasFixedSize(true);
+
+        mRecyclerView.setAdapter(adapter);
     }
 }

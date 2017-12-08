@@ -31,10 +31,10 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_list, container, false);
 
-        fragmentDataBinding.rvCoinList.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
-
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
         CoinListAdapter coinListAdapter = new CoinListAdapter(mCoinListDataModel);
-        fragmentDataBinding.rvCoinList.setAdapter(coinListAdapter);
+
+        initUI(fragmentDataBinding.rvCoinList, staggeredGridLayoutManager, false, coinListAdapter);
 
         FetchCoinList.loadCoins(coinListAdapter);
 
