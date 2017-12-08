@@ -20,16 +20,16 @@ import java.util.List;
 public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHolder> {
 
     private List<CoinListDataModel> mCoinListDataModels;
-    private Context mContext;
 
-    public CoinListAdapter(List<CoinListDataModel> mCoinListDataModels, Context mContext) {
+    public CoinListAdapter(List<CoinListDataModel> mCoinListDataModels) {
         this.mCoinListDataModels = mCoinListDataModels;
-        this.mContext = mContext;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        Context context = parent.getContext();
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         CoinListItemCardViewBinding coinListItemCardViewBinding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.coin_list_item_card_view,

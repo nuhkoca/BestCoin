@@ -1,9 +1,5 @@
 package com.mobilemovement.bestcoin.coinlist.network;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mobilemovement.bestcoin.BuildConfig;
@@ -28,7 +24,7 @@ import rx.schedulers.Schedulers;
 
 public class FetchCoinList {
 
-    public static synchronized void fetchCoins(final CoinListAdapter coinListAdapter, final Context context) {
+    public static synchronized void fetchCoins(final CoinListAdapter coinListAdapter) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -48,7 +44,6 @@ public class FetchCoinList {
                 .onErrorResumeNext(new Func1<Throwable, Observable<? extends List<CoinListDataModel>>>() {
                     @Override
                     public Observable<? extends List<CoinListDataModel>> call(Throwable throwable) {
-                        Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_LONG).show();
                         return Observable.error(throwable);
                     }
                 })

@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_fragment"
-            android:title="First" />
+            android:title="@string/fragment_coin_list" />
         <item
             android:id="@+id/nav_second_fragment"
             android:title="Second" />

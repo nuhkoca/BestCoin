@@ -31,13 +31,12 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_list, container, false);
 
-        fragmentDataBinding.rvCoinList.setHasFixedSize(true);
         fragmentDataBinding.rvCoinList.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
-        CoinListAdapter coinListAdapter = new CoinListAdapter(mCoinListDataModel, getActivity());
+        CoinListAdapter coinListAdapter = new CoinListAdapter(mCoinListDataModel);
         fragmentDataBinding.rvCoinList.setAdapter(coinListAdapter);
 
-        FetchCoinList.fetchCoins(coinListAdapter, getActivity());
+        FetchCoinList.fetchCoins(coinListAdapter);
 
         return fragmentDataBinding.getRoot();
     }
