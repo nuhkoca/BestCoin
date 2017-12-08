@@ -36,7 +36,7 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
         CoinListAdapter coinListAdapter = new CoinListAdapter(mCoinListDataModel);
         fragmentDataBinding.rvCoinList.setAdapter(coinListAdapter);
 
-        FetchCoinList.fetchCoins(coinListAdapter);
+        FetchCoinList.loadCoins(coinListAdapter);
 
         return fragmentDataBinding.getRoot();
     }

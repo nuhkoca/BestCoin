@@ -3,6 +3,7 @@ package com.mobilemovement.bestcoin.coinlist.adapter;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
 
         void bindViews(CoinListDataModel coinListDataModel){
             coinListItemCardViewBinding.tvCoinName.setText(coinListDataModel.getName());
+
+            Log.e("AdapterLOG", coinListItemCardViewBinding.tvCoinName.getText().toString());
         }
     }
 }
