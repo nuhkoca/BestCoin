@@ -66,7 +66,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
         }
 
         void bindViews(CoinListDataModel coinListDataModel){
-            coinListItemCardViewBinding.setCoinListModel(coinListDataModel);
+            coinListItemCardViewBinding.tvCoinName.setText(coinListDataModel.getName());
         }
     }
 }

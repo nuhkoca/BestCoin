@@ -34,6 +34,7 @@
             android:contentDescription="@string/card_view_image_holder" />
 
         <TextView
+            android:id="@+id/tv_coin_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/robotoregular"
@@ -41,6 +42,7 @@
             android:textSize="16sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:textColor="@color/colorBlack"
             android:text="@{coinListModel.name}"  />
 
     </LinearLayout>

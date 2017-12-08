@@ -13,13 +13,19 @@ import android.view.ViewGroup;
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
 import com.mobilemovement.bestcoin.coinlist.adapter.CoinListAdapter;
+import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
 import com.mobilemovement.bestcoin.coinlist.network.FetchCoinList;
 import com.mobilemovement.bestcoin.databinding.FragmentCoinListBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
+
+    private List<CoinListDataModel> mCoinListDataModel = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +34,10 @@ public class CoinListFragment extends BaseFragment<FragmentCoinListBinding> {
         fragmentDataBinding.rvCoinList.setHasFixedSize(true);
         fragmentDataBinding.rvCoinList.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
 
-        FetchCoinList.fetchCoins(fragmentDataBinding.rvCoinList, getActivity());
+        CoinListAdapter coinListAdapter = new CoinListAdapter(mCoinListDataModel, getActivity());
+        fragmentDataBinding.rvCoinList.setAdapter(coinListAdapter);
+
+        FetchCoinList.fetchCoins(coinListAdapter, getActivity());
 
         return fragmentDataBinding.getRoot();
     }

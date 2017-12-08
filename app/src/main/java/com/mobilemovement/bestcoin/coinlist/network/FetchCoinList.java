@@ -28,7 +28,7 @@ import rx.schedulers.Schedulers;
 
 public class FetchCoinList {
 
-    public static synchronized void fetchCoins(final RecyclerView coinRecyclerView, final Context context) {
+    public static synchronized void fetchCoins(final CoinListAdapter coinListAdapter, final Context context) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -65,9 +65,6 @@ public class FetchCoinList {
 
                     @Override
                     public void onNext(List<CoinListDataModel> coinListDataModel) {
-                        CoinListAdapter coinListAdapter = new CoinListAdapter(coinListDataModel, context);
-                        coinRecyclerView.setAdapter(coinListAdapter);
-
                         coinListAdapter.swapData(coinListDataModel);
                     }
                 });
