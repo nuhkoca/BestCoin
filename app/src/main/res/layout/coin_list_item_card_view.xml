@@ -1,6 +1,8 @@
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout>
     <data>
-        <variable name="coinListModel" type="com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel"/>
+        <variable name="result" type="com.mobilemovement.bestcoin.coinlist.model.Result"/>
+
+        <variable name="currencyResponse" type="com.mobilemovement.bestcoin.coinlist.model.CurrencyResponse"/>
     </data>
 
 <LinearLayout
@@ -24,14 +26,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="16dp">
 
-        <!-- <ImageView
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/card_view_image_holder" /> -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/iv_background_main"
+            android:contentDescription="@string/card_view_image_holder" />
 
         <TextView
             android:id="@+id/tv_coin_name"
@@ -40,10 +43,11 @@
             android:fontFamily="@font/robotoregular"
             android:lineSpacingExtra="8dp"
             android:textSize="16sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/colorBlack"
-            android:text="@{coinListModel.name}"  />
+            android:text="@{result.currencyLong}"
+            android:gravity="center"/>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

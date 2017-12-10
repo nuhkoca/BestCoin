@@ -1,8 +1,6 @@
 package com.mobilemovement.bestcoin.network;
 
-import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
-
-import java.util.List;
+import com.mobilemovement.bestcoin.coinlist.model.CurrencyResponse;
 
 import retrofit2.http.GET;
 import rx.Observable;
@@ -13,6 +11,6 @@ import rx.Observable;
 
 public interface IBestCoinAPI {
 
-    @GET("/en/api/v1/currency/")
-    Observable<List<CoinListDataModel>> loadCoins();
+    @GET("/public/getcurrencies/")
+    Observable<CurrencyResponse> loadCurrencies();
 }

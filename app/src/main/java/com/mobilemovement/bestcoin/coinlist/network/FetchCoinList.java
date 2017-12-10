@@ -1,16 +1,15 @@
 package com.mobilemovement.bestcoin.coinlist.network;
 
-import com.mobilemovement.bestcoin.coinlist.adapter.CoinListAdapter;
-import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
+import android.util.Log;
+
+import com.mobilemovement.bestcoin.coinlist.adapter.CurrencyAdapter;
+import com.mobilemovement.bestcoin.coinlist.model.CurrencyResponse;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
-
-import java.util.List;
 
 import retrofit2.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -20,20 +19,23 @@ import rx.schedulers.Schedulers;
  */
 
 public class FetchCoinList {
-    public static void loadCoins(final CoinListAdapter coinListAdapter) {
+    public static void loadCurrencies(final CurrencyAdapter currencyAdapter) {
         Retrofit retrofit = RetrofitInterceptor.build();
 
-        Observable<List<CoinListDataModel>> getCoinList = ObservableHelper.loadCoin(retrofit);
+        Observable<CurrencyResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
 
-        getCoinList.subscribeOn(Schedulers.io())
+        getCurrencies.subscribeOn(Schedulers.io())
+                .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends List<CoinListDataModel>>>() {
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CurrencyResponse>>() {
                     @Override
-                    public Observable<? extends List<CoinListDataModel>> call(Throwable throwable) {
+                    public Observable<? extends CurrencyResponse> call(Throwable throwable) {
+                        Log.d("onErrorResumeNext", throwable.getMessage());
+
                         return Observable.error(throwable);
                     }
                 })
-                .subscribe(new Subscriber<List<CoinListDataModel>>() {
+                .subscribe(new Subscriber<CurrencyResponse>() {
                     @Override
                     public void onCompleted() {
 
@@ -41,12 +43,14 @@ public class FetchCoinList {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("onErrorLog", e.getMessage());
 
                     }
 
                     @Override
-                    public void onNext(List<CoinListDataModel> coinListDataModel) {
-                        coinListAdapter.swapData(coinListDataModel);
+                    public void onNext(CurrencyResponse currencyResponse) {
+                        if (currencyResponse.getSuccess())
+                            currencyAdapter.swapData(currencyResponse.getResults());
                     }
                 });
     }

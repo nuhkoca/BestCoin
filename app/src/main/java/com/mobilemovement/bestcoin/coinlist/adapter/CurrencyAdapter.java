@@ -8,21 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobilemovement.bestcoin.R;
-import com.mobilemovement.bestcoin.coinlist.model.CoinListDataModel;
+import com.mobilemovement.bestcoin.coinlist.model.Result;
 import com.mobilemovement.bestcoin.databinding.CoinListItemCardViewBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by nuhkoca on 4.12.2017.
  */
 
-public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHolder> {
+public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHolder> {
 
-    private List<CoinListDataModel> mCoinListDataModels;
+    private List<Result> mResults;
 
-    public CoinListAdapter(List<CoinListDataModel> mCoinListDataModels) {
-        this.mCoinListDataModels = mCoinListDataModels;
+    public CurrencyAdapter() {
+        mResults = new ArrayList<>();
     }
 
     @Override
@@ -41,18 +42,18 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CoinListDataModel coinListDataModel = mCoinListDataModels.get(position);
+        Result result = mResults.get(position);
 
-        holder.bindViews(coinListDataModel);
+        holder.bindViews(result);
     }
 
     @Override
     public int getItemCount() {
-        return mCoinListDataModels.size();
+        return mResults.size();
     }
 
-    public void swapData(List<CoinListDataModel> coinListDataModel) {
-        mCoinListDataModels = coinListDataModel;
+    public void swapData(List<Result> result) {
+        mResults = result;
         notifyDataSetChanged();
     }
 
@@ -65,8 +66,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.ViewHo
             coinListItemCardViewBinding = DataBindingUtil.bind(itemView);
         }
 
-        void bindViews(CoinListDataModel coinListDataModel){
-            coinListItemCardViewBinding.setCoinListModel(coinListDataModel);
+        void bindViews(Result result) {
+            coinListItemCardViewBinding.setResult(result);
             coinListItemCardViewBinding.executePendingBindings();
         }
     }

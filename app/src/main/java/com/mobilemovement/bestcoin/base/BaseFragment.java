@@ -14,13 +14,10 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
     protected B fragmentDataBinding;
     protected RecyclerView mRecyclerView;
 
-    protected void initUI(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, boolean setHasFixed, RecyclerView.Adapter adapter) {
+    protected void initUI(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter) {
         mRecyclerView = recyclerView;
 
         recyclerView.setLayoutManager(layoutManager);
-
-        if (setHasFixed)
-            mRecyclerView.setHasFixedSize(true);
 
         mRecyclerView.setAdapter(adapter);
     }
