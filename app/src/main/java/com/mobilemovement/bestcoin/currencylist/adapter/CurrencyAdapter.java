@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.coinlist.adapter;
+package com.mobilemovement.bestcoin.currencylist.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobilemovement.bestcoin.R;
-import com.mobilemovement.bestcoin.coinlist.model.Result;
+import com.mobilemovement.bestcoin.currencylist.model.Result;
 import com.mobilemovement.bestcoin.databinding.CoinListItemCardViewBinding;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         CoinListItemCardViewBinding coinListItemCardViewBinding = DataBindingUtil.inflate(layoutInflater,
-                R.layout.coin_list_item_card_view,
+                R.layout.currency_list_item_card_view,
                 parent,
                 false);
 

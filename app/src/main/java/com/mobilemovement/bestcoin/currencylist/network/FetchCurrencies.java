@@ -1,9 +1,10 @@
-package com.mobilemovement.bestcoin.coinlist.network;
+package com.mobilemovement.bestcoin.currencylist.network;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.mobilemovement.bestcoin.coinlist.adapter.CurrencyAdapter;
-import com.mobilemovement.bestcoin.coinlist.model.CurrencyResponse;
+import com.mobilemovement.bestcoin.currencylist.adapter.CurrencyAdapter;
+import com.mobilemovement.bestcoin.currencylist.model.CurrencyResponse;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
 
@@ -18,8 +19,11 @@ import rx.schedulers.Schedulers;
  * Created by nuhkoca on 4.12.2017.
  */
 
-public class FetchCoinList {
-    public static void loadCurrencies(final CurrencyAdapter currencyAdapter) {
+public class FetchCurrencies {
+    private static final String ON_ERROR_RESUME_NEXT_LOG_TAG = "onErrorResumeNextLog";
+    private static final String ON_ERROR__LOG_TAG = "onErrorLog";
+
+    public static void loadCurrencies(final CurrencyAdapter currencyAdapter, final Context context) {
         Retrofit retrofit = RetrofitInterceptor.build();
 
         Observable<CurrencyResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
@@ -30,7 +34,7 @@ public class FetchCoinList {
                 .onErrorResumeNext(new Func1<Throwable, Observable<? extends CurrencyResponse>>() {
                     @Override
                     public Observable<? extends CurrencyResponse> call(Throwable throwable) {
-                        Log.d("onErrorResumeNext", throwable.getMessage());
+                        Log.d(ON_ERROR_RESUME_NEXT_LOG_TAG, throwable.getMessage());
 
                         return Observable.error(throwable);
                     }
@@ -43,14 +47,13 @@ public class FetchCoinList {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("onErrorLog", e.getMessage());
-
+                        Log.d(ON_ERROR__LOG_TAG, e.getMessage());
                     }
 
                     @Override
                     public void onNext(CurrencyResponse currencyResponse) {
                         if (currencyResponse.getSuccess())
-                            currencyAdapter.swapData(currencyResponse.getResults());
+                            currencyAdapter.swapData(currencyResponse.getResult());
                     }
                 });
     }

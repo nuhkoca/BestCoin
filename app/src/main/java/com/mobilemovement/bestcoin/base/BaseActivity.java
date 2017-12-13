@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.mobilemovement.bestcoin.R;
-import com.mobilemovement.bestcoin.coinlist.CoinListFragment;
+import com.mobilemovement.bestcoin.currencylist.CurrencyListFragment;
 import com.mobilemovement.bestcoin.utils.TransparentMaker;
 
 /**
@@ -61,13 +61,13 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
         switch (menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                fragmentClass = CoinListFragment.class;
+                fragmentClass = CurrencyListFragment.class;
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = CoinListFragment.class;
+                fragmentClass = CurrencyListFragment.class;
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = CoinListFragment.class;
+                fragmentClass = CurrencyListFragment.class;
                 break;
             default:
 

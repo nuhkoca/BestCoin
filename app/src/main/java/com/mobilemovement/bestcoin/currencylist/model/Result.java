@@ -1,22 +1,31 @@
-package com.mobilemovement.bestcoin.coinlist.model;
+package com.mobilemovement.bestcoin.currencylist.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by nuhkoca on 4.12.2017.
  */
 
 public class Result extends BaseObservable {
+    @SerializedName("Currency")
     private String currency;
+    @SerializedName("CurrencyLong")
     private String currencyLong;
+    @SerializedName("MinConfirmation")
     private Integer minConfirmation;
+    @SerializedName("TxFree")
     private Double txFee;
+    @SerializedName("IsActive")
     private Boolean isActive;
+    @SerializedName("CoinType")
     private String coinType;
+    @SerializedName("BaseAddress")
     private String baseAddress;
+    @SerializedName("Notice")
     private Object notice;
 
     public Result(String currency, String currencyLong, Integer minConfirmation, Double txFee, Boolean isActive, String coinType, String baseAddress, Object notice) {

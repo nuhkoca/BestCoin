@@ -1,6 +1,6 @@
 package com.mobilemovement.bestcoin.network;
 
-import com.mobilemovement.bestcoin.coinlist.model.CurrencyResponse;
+import com.mobilemovement.bestcoin.currencylist.model.CurrencyResponse;
 
 import retrofit2.Retrofit;
 import rx.Observable;

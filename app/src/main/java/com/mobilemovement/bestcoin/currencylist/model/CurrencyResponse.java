@@ -1,11 +1,11 @@
-package com.mobilemovement.bestcoin.coinlist.model;
+package com.mobilemovement.bestcoin.currencylist.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +13,12 @@ import java.util.List;
  */
 
 public class CurrencyResponse extends BaseObservable {
+    @SerializedName("success")
     private Boolean success;
+    @SerializedName("message")
     private String message;
-    private List<Result> results;
+    @SerializedName("result")
+    private List<Result> result;
 
     public CurrencyResponse() {
     }
@@ -41,12 +44,12 @@ public class CurrencyResponse extends BaseObservable {
     }
 
     @Bindable
-    public List<Result> getResults() {
-        return results;
+    public List<Result> getResult() {
+        return result;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
-        notifyPropertyChanged(BR.results);
+    public void setResult(List<Result> result) {
+        this.result = result;
+        notifyPropertyChanged(BR.result);
     }
 }

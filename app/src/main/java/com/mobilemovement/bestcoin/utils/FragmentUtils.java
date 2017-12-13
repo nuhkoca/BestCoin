@@ -14,7 +14,7 @@ public class FragmentUtils {
 
     private static final int FRAGMENT_HOLDER_ID = R.id.main_fragment_holder;
 
-    public static void replaceFragment(HolderActivity holderActivity, Fragment newFragment) {
+    public static void replaceFragment(HolderActivity holderActivity, Fragment newFragment, String tag) {
         Fragment fragment = null;
         Class fragmentClass;
 
@@ -26,7 +26,9 @@ public class FragmentUtils {
             e.printStackTrace();
         }
 
-        FragmentManager fragmentManager = holderActivity.getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(FRAGMENT_HOLDER_ID, fragment).commit();
+        if (fragment != null) {
+            FragmentManager fragmentManager = holderActivity.getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(FRAGMENT_HOLDER_ID, fragment, tag).commit();
+        }
     }
 }
