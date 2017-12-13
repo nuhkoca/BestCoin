@@ -1,7 +1,7 @@
 # BestCoin
 A cryptocurrency app
 
-This app is still being maintained.
+> This app is still being maintained.
 
 # Technologies used in the app
 1. RxJava
