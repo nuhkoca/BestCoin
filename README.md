@@ -4,7 +4,7 @@ A cryptocurrency app
 This app is still being maintained.
 
 # Technologies used in the app
-RxJava
-Data Binding
-Retrofit
-Binding Adapter
+1. RxJava
+2. Data Binding
+3. Retrofit
+4. Binding Adapter
