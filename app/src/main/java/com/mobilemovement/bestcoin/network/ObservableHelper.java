@@ -1,6 +1,6 @@
 package com.mobilemovement.bestcoin.network;
 
-import com.mobilemovement.bestcoin.currencylist.model.CurrencyResponse;
+import com.mobilemovement.bestcoin.model.MarketResponse;
 
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -10,7 +10,13 @@ import rx.Observable;
  */
 
 public class ObservableHelper {
-    public static Observable<CurrencyResponse> loadCurrencies(Retrofit retrofit) {
+
+    /**
+     *  Returns the cal of IBestCoinAPI {@param retrofit
+     *  Returns the cal of IBestCoinAPI {@link IBestCoinAPI
+     */
+
+    public static Observable<MarketResponse> loadCurrencies(Retrofit retrofit) {
         IBestCoinAPI iBestCoinAPI = retrofit.create(IBestCoinAPI.class);
 
         return iBestCoinAPI.loadCurrencies();

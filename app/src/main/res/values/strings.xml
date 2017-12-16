@@ -10,12 +10,12 @@
     <!-- Drawer Items -->
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="drawer_items_1">Coin List</string>
+    <string name="drawer_items_1">List of Coins</string>
     <string name="drawer_items_2">Price</string>
     <string name="drawer_items_3">Price Historical</string>
     <string name="drawer_items_4">Coin Snapshot</string>
 
     <!-- Fragment Names -->
-    <string name="fragment_coin_list">Coin List</string>
+    <string name="fragment_coin_list">List of Coins</string>
 
 </resources>

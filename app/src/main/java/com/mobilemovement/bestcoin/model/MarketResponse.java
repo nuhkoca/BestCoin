@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.currencylist.model;
+package com.mobilemovement.bestcoin.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by nuhkoca on 9.12.2017.
+ * Created by nuhkoca on 14.12.2017.
  */
 
-public class CurrencyResponse extends BaseObservable {
+public class MarketResponse extends BaseObservable {
     @SerializedName("success")
     private Boolean success;
     @SerializedName("message")
@@ -20,7 +20,12 @@ public class CurrencyResponse extends BaseObservable {
     @SerializedName("result")
     private List<Result> result;
 
-    public CurrencyResponse() {
+    public MarketResponse() {}
+
+    public MarketResponse(Boolean success, String message, List<Result> result) {
+        this.success = success;
+        this.message = message;
+        this.result = result;
     }
 
     @Bindable

@@ -8,7 +8,11 @@ import android.view.WindowManager;
  * Created by nuhkoca on 7.12.2017.
  */
 
-public class TransparentMaker {
+public class TransparentUtils {
+
+    /**
+     *  Makes activity transparet with the {@param activity
+     */
 
     public static void makeStatusBarTransparent(Activity activity){
         Window w = activity.getWindow();

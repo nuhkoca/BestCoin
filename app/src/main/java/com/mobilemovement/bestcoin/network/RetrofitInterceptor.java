@@ -12,6 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by nuhkoca on 9.12.2017.
  */
 
+/**
+ *  A class to build Retrofit {@link RetrofitInterceptor
+ */
+
 public class RetrofitInterceptor {
     public static Retrofit build() {
         Gson gson = new GsonBuilder()

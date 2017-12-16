@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.currencylist.CurrencyListFragment;
-import com.mobilemovement.bestcoin.utils.TransparentMaker;
+import com.mobilemovement.bestcoin.utils.TransparentUtils;
 
 /**
  * Created by nuhkoca on 3.12.2017.
@@ -39,7 +39,7 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
         mDrawerLayout = drawerLayout;
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
-        TransparentMaker.makeStatusBarTransparent(this);
+        TransparentUtils.makeStatusBarTransparent(this);
     }
 
 

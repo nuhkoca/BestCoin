@@ -18,23 +18,10 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
     protected static final int STAGGERED_LAYOUT_ID = 120;
     protected static final int LINEAR_LAYOUT_ID = 121;
 
-    protected void initUI(RecyclerView recyclerView, int layoutId, boolean setHasFixedSize, RecyclerView.Adapter adapter) {
+    protected void initUI(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         mRecyclerView = recyclerView;
 
-        switch (layoutId) {
-            case STAGGERED_LAYOUT_ID:
-                mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-            case LINEAR_LAYOUT_ID:
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-            default:
-                break;
-        }
 
-        if (setHasFixedSize) {
-            mRecyclerView.setHasFixedSize(true);
-        } else {
-            mRecyclerView.setHasFixedSize(false);
-        }
 
         mRecyclerView.setAdapter(adapter);
     }

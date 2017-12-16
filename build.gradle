@@ -25,6 +25,7 @@ allprojects {
 ext{
     //dependencies
     supportLibraryVersion = '27.0.2'
+    rxJavaLibraryVersion = '2.3.0'
 }
 
 task clean(type: Delete) {

@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobilemovement.bestcoin.R;
-import com.mobilemovement.bestcoin.currencylist.model.Result;
-import com.mobilemovement.bestcoin.databinding.CoinListItemCardViewBinding;
+import com.mobilemovement.bestcoin.databinding.CurrencyListItemCardViewBinding;
+import com.mobilemovement.bestcoin.model.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,12 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        CoinListItemCardViewBinding coinListItemCardViewBinding = DataBindingUtil.inflate(layoutInflater,
+        CurrencyListItemCardViewBinding currencyListItemCardViewBinding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.currency_list_item_card_view,
                 parent,
                 false);
 
-        return new ViewHolder(coinListItemCardViewBinding.getRoot());
+        return new ViewHolder(currencyListItemCardViewBinding.getRoot());
     }
 
     @Override
@@ -59,16 +59,16 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private CoinListItemCardViewBinding coinListItemCardViewBinding;
+        private CurrencyListItemCardViewBinding currencyListItemCardViewBinding;
 
         ViewHolder(View itemView) {
             super(itemView);
-            coinListItemCardViewBinding = DataBindingUtil.bind(itemView);
+            currencyListItemCardViewBinding = DataBindingUtil.bind(itemView);
         }
 
         void bindViews(Result result) {
-            coinListItemCardViewBinding.setResult(result);
-            coinListItemCardViewBinding.executePendingBindings();
+            currencyListItemCardViewBinding.setResult(result);
+            currencyListItemCardViewBinding.executePendingBindings();
         }
     }
 }

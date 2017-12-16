@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.mobilemovement.bestcoin.currencylist.adapter.CurrencyAdapter;
-import com.mobilemovement.bestcoin.currencylist.model.CurrencyResponse;
+import com.mobilemovement.bestcoin.model.MarketResponse;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
 
@@ -23,23 +23,27 @@ public class FetchCurrencies {
     private static final String ON_ERROR_RESUME_NEXT_LOG_TAG = "onErrorResumeNextLog";
     private static final String ON_ERROR__LOG_TAG = "onErrorLog";
 
-    public static void loadCurrencies(final CurrencyAdapter currencyAdapter, final Context context) {
+    /**
+     *  Adapter to load currencies into RecyclerView {@param currencyAdapter
+     */
+
+    public static void loadCurrencies(final CurrencyAdapter currencyAdapter) {
         Retrofit retrofit = RetrofitInterceptor.build();
 
-        Observable<CurrencyResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
+        Observable<MarketResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
 
         getCurrencies.subscribeOn(Schedulers.io())
                 .retry(1)
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CurrencyResponse>>() {
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends MarketResponse>>() {
                     @Override
-                    public Observable<? extends CurrencyResponse> call(Throwable throwable) {
+                    public Observable<? extends MarketResponse> call(Throwable throwable) {
                         Log.d(ON_ERROR_RESUME_NEXT_LOG_TAG, throwable.getMessage());
 
                         return Observable.error(throwable);
                     }
                 })
-                .subscribe(new Subscriber<CurrencyResponse>() {
+                .subscribe(new Subscriber<MarketResponse>() {
                     @Override
                     public void onCompleted() {
 
@@ -51,9 +55,14 @@ public class FetchCurrencies {
                     }
 
                     @Override
-                    public void onNext(CurrencyResponse currencyResponse) {
-                        if (currencyResponse.getSuccess())
-                            currencyAdapter.swapData(currencyResponse.getResult());
+                    public void onNext(MarketResponse marketResponse) {
+                        Log.d("onNextLog", marketResponse.getResult().get(0).getMarketCurrencyLong());
+                        Log.d("onNextLog", marketResponse.getResult().get(0).getLogoUrl());
+
+                        if (marketResponse.getSuccess())
+                            currencyAdapter.swapData(marketResponse.getResult());
+                            Log.d("onNextLog", marketResponse.getResult().get(0).getMarketCurrencyLong());
+                            Log.d("onNextLog", marketResponse.getResult().get(0).getLogoUrl());
                     }
                 });
     }

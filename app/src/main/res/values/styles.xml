@@ -11,15 +11,25 @@
         <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
+
+    <!-- Launcher Theme -->
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+
+    <!-- Drawer Arrow Style -->
     <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>
         <item name="color">@color/colorWhite</item>
     </style>
 
+
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
     <style name="CollapsingTextAppearance.Inverse" >
         <item name="android:textSize">30sp</item>
     </style>
+
 
     <style name="TextAppearance" parent="TextAppearance.AppCompat"/>
     <style name="TextAppearance.Header">
