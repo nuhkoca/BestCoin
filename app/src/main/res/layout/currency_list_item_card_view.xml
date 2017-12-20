@@ -14,27 +14,42 @@
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPaddingBottom="8dp"
-    app:contentPaddingLeft="8dp"
-    app:contentPaddingRight="8dp"
+    app:contentPaddingBottom="@dimen/dimension_8dp"
+    app:contentPaddingLeft="@dimen/dimension_8dp"
+    app:contentPaddingRight="@dimen/dimension_8dp"
     app:cardCornerRadius="4dp"
     app:cardBackgroundColor="@android:color/white"
     app:cardElevation="4dp"
-    android:layout_margin="8dp">
+    android:layout_margin="@dimen/dimension_8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="8dp">
+        android:paddingTop="@dimen/dimension_8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/pbCoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="visible"
+            android:layout_centerInParent="true"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="120dp"
             android:layout_height="140dp"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:scaleType="centerCrop"
             android:contentDescription="@string/card_view_image_holder"
-            app:logoUrl="@{result.logoUrl}" />
+            app:logoUrl="@{result.logoUrl}"
+            app:progressBar="@{pbCoin}"/>
+
+    </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_coin_name"
@@ -43,14 +58,17 @@
             android:fontFamily="@font/robotoregular"
             android:lineSpacingExtra="8dp"
             android:textSize="14sp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dimension_8dp"
             android:layout_gravity="center"
             android:textColor="@color/colorBlack"
             android:text="@{result.marketCurrencyLong}"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:gravity="center"/>
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>
 </LinearLayout>
 </layout>

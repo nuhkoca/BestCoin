@@ -10,9 +10,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.currencylist.CurrencyListFragment;
+import com.mobilemovement.bestcoin.utils.CollapsingToolbarLayoutBackgroundUtils;
 import com.mobilemovement.bestcoin.utils.TransparentUtils;
 
 /**
@@ -26,8 +28,9 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
     protected Toolbar mToolbar;
+    protected ImageView mImageView;
 
-    protected void initUI(Toolbar toolbar, DrawerLayout drawerLayout, NavigationView navigationView, ActionBarDrawerToggle actionBarDrawerToggle) {
+    protected void initUI(Toolbar toolbar, DrawerLayout drawerLayout, NavigationView navigationView, ActionBarDrawerToggle actionBarDrawerToggle, ImageView imageView) {
         mToolbar = toolbar;
         setSupportActionBar(toolbar);
 
@@ -38,6 +41,10 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
         mDrawerLayout = drawerLayout;
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        mImageView = imageView;
+
+        CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background,this);
 
         TransparentUtils.makeStatusBarTransparent(this);
     }
@@ -60,13 +67,27 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
         Class fragmentClass = null;
 
         switch (menuItem.getItemId()) {
-            case R.id.nav_first_fragment:
+            case R.id.nav_fragment_1:
+                CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background,this);
                 fragmentClass = CurrencyListFragment.class;
                 break;
-            case R.id.nav_second_fragment:
+            case R.id.nav_fragment_2:
+                CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.market_background,this);
                 fragmentClass = CurrencyListFragment.class;
                 break;
-            case R.id.nav_third_fragment:
+            case R.id.nav_fragment_3:
+                fragmentClass = CurrencyListFragment.class;
+                break;
+            case R.id.nav_fragment_4:
+                fragmentClass = CurrencyListFragment.class;
+                break;
+            case R.id.nav_fragment_5:
+                fragmentClass = CurrencyListFragment.class;
+                break;
+            case R.id.nav_fragment_6:
+                fragmentClass = CurrencyListFragment.class;
+                break;
+            case R.id.nav_fragment_7:
                 fragmentClass = CurrencyListFragment.class;
                 break;
             default:
@@ -82,7 +103,10 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
         }
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_fragment_holder, fragment).commit();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_holder, fragment)
+                .commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);

@@ -17,7 +17,7 @@ public class Result extends BaseObservable {
     private String baseCurrency;
     @SerializedName("MarketCurrencyLong")
     private String marketCurrencyLong;
-    @SerializedName("BaseCurrencyLog")
+    @SerializedName("BaseCurrencyLong")
     private String baseCurrencyLong;
     @SerializedName("MinTradeSize")
     private Double minTradeSize;

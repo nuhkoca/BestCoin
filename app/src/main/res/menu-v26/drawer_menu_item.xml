@@ -5,37 +5,44 @@
         <item
             android:id="@+id/nav_fragment_1"
             android:title="@string/fragment_coin_list"
+            android:iconTint="@color/colorWhite"
             android:checked="true"/>
     </group>
 
     <group android:id="@+id/nav_market" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_fragment_2"
-            android:title="@string/drawer_items_2" />
+            android:title="@string/drawer_items_2"
+            android:iconTint="@color/colorWhite"/>
 
         <item
             android:id="@+id/nav_fragment_3"
-            android:title="@string/drawer_items_4" />
+            android:title="@string/drawer_items_4"
+            android:iconTint="@color/colorWhite"/>
 
         <item
             android:id="@+id/nav_fragment_4"
-            android:title="@string/drawer_items_5" />
+            android:title="@string/drawer_items_5"
+            android:iconTint="@color/colorWhite"/>
 
         <item
             android:id="@+id/nav_fragment_5"
-            android:title="@string/drawer_items_7" />
+            android:title="@string/drawer_items_7"
+            android:iconTint="@color/colorWhite"/>
     </group>
 
     <group android:id="@+id/nav_ticker" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_fragment_6"
-            android:title="@string/drawer_items_3" />
+            android:title="@string/drawer_items_3"
+            android:iconTint="@color/colorWhite"/>
     </group>
 
     <group android:id="@+id/nav_order" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_fragment_7"
-            android:title="@string/drawer_items_6" />
+            android:title="@string/drawer_items_6"
+            android:iconTint="@color/colorWhite"/>
     </group>
 
 </menu>

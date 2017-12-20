@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<!-- The navigation drawer that comes from the left -->
+<!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+<!-- itemIconTint icon color -->
+<!-- itemTextColor item text color -->
+<!-- background nav background color -->
+<android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nv_item_holder"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/colorAccent"
+    app:itemIconTint="@color/colorWhite"
+    app:itemTextColor="@color/colorWhite"
+    app:menu="@menu/drawer_menu_item"
+    app:headerLayout="@layout/nav_header"
+    style="@style/AppTheme.NavigationViewTheme">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/all_rights_reserved"
+        android:layout_gravity="bottom"
+        android:gravity="end"
+        android:padding="@dimen/dimension_16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/robotolight"
+        android:textColor="@color/colorWhite"/>
+
+</android.support.design.widget.NavigationView>
+
+</layout>

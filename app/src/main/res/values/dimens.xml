@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimension_8dp">8dp</dimen>
+    <dimen name="dimension_16dp">16dp</dimen>
+    <dimen name="collapsing_toolbar_layout_height">300dp</dimen>
+    <dimen name="nav_header_height">192dp</dimen>
+</resources>

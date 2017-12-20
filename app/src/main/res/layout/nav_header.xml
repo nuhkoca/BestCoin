@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="@dimen/nav_header_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorPrimaryDark"
-    android:padding="16dp"
+    android:background="?attr/colorAccent"
+    android:padding="@dimen/dimension_16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:gravity="bottom">
@@ -11,6 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_splash_screen_icon"/>
+        app:srcCompat="@drawable/ic_splash_screen_icon"
+        android:contentDescription="@string/nav_header_image_holder" />
 
 </LinearLayout>

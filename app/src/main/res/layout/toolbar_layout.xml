@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/cl_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="RtlHardcoded"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/apl_toolbar_layout"
@@ -19,17 +18,17 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/ctl_toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/collapsing_toolbar_layout_height"
                 app:expandedTitleMarginBottom="94dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:expandedTitleTextAppearance="@style/CollapsingTextAppearance.Inverse"
                 app:contentScrim="?colorPrimary" >
 
-                <ImageView
-                    android:layout_width="fill_parent"
+                <com.flaviofaria.kenburnsview.KenBurnsView
+                    android:id="@+id/iv_ctl_background"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/iv_background_main"
-                    android:tint="#BB3E50B4"
+                    android:tint="@color/colorTint"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/toolbar_layout_image_holder" />
 
