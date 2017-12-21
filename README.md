@@ -8,7 +8,9 @@ A cryptocurrency app
 2. Data Binding
 3. Retrofit2
 4. Binding Adapter
-5. Half of Design Pattern
+5. Glide4
+6. Timber
+7. Half of Design Pattern
 
 # License
 
