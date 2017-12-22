@@ -1,12 +1,11 @@
-package com.mobilemovement.bestcoin.currencylist.network;
+package com.mobilemovement.bestcoin.view.currencylist.network;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
-
-import com.mobilemovement.bestcoin.currencylist.adapter.CurrencyAdapter;
 import com.mobilemovement.bestcoin.model.MarketResponse;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
+import com.mobilemovement.bestcoin.view.callback.IResponseListener;
+import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
 
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -26,10 +25,10 @@ public class FetchCurrencies {
      *  Adapter to load currencies into RecyclerView {@param currencyAdapter
      **/
 
-    public static void loadCurrencies(final CurrencyAdapter currencyAdapter) {
-        Retrofit retrofit = RetrofitInterceptor.build();
+    public static void loadCurrencies(final CurrencyAdapter currencyAdapter, final IResponseListener iResponseListener) {
+        final Retrofit retrofit = RetrofitInterceptor.build();
 
-        Observable<MarketResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
+        final Observable<MarketResponse> getCurrencies = ObservableHelper.loadCurrencies(retrofit);
 
         getCurrencies.subscribeOn(Schedulers.io())
                 .retry(1)
@@ -52,13 +51,14 @@ public class FetchCurrencies {
                     @Override
                     public void onError(Throwable e) {
                         Timber.d(e.getMessage());
+                        iResponseListener.onFailed();
                     }
 
                     @Override
                     public void onNext(MarketResponse marketResponse) {
                         if (marketResponse.getSuccess())
                             currencyAdapter.swapData(marketResponse.getResult());
-                            Timber.d("Fetched the data");
+                            Timber.d("Fetched currency data");
                     }
                 });
     }

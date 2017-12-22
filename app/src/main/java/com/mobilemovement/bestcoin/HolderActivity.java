@@ -1,5 +1,6 @@
 package com.mobilemovement.bestcoin;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,11 +10,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.mobilemovement.bestcoin.base.BaseActivity;
-import com.mobilemovement.bestcoin.currencylist.CurrencyListFragment;
 import com.mobilemovement.bestcoin.databinding.ActivityHolderBinding;
+import com.mobilemovement.bestcoin.network.activity.NoInternetActivity;
+import com.mobilemovement.bestcoin.utils.ConnectionUtils;
 import com.mobilemovement.bestcoin.utils.FragmentUtils;
+import com.mobilemovement.bestcoin.view.currencylist.CurrencyListFragment;
+
+import java.io.IOException;
+
+import timber.log.Timber;
 
 public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
@@ -26,6 +32,8 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
         super.onCreate(savedInstanceState);
         activityDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_holder);
 
+        Timber.plant(new Timber.DebugTree());
+
         mActionBarDrawerToggle = setupDrawerToggle();
 
         initUI(activityDataBinding.ahToolbarLayout.toolbar,
@@ -36,7 +44,22 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
         activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
 
-        Fragment mImitationFragmentOf = new CurrencyListFragment();
+        boolean isConnected = false;
+        try {
+            isConnected = ConnectionUtils.pulse(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (!isConnected) {
+            Timber.d("No internet connection");
+
+            Intent noInternetIntent = new Intent(HolderActivity.this, NoInternetActivity.class);
+            startActivity(noInternetIntent);
+        }
+
+        Fragment mImitationFragmentOf;
+        mImitationFragmentOf = new CurrencyListFragment();
 
         if (savedInstanceState == null)
             FragmentUtils.replaceFragment(this, mImitationFragmentOf);

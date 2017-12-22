@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobilemovement.bestcoin">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,15 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"
-            android:theme="@style/AppTheme.Launcher">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.Launcher"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HolderActivity" />
+        <activity android:name=".HolderActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".network.activity.NoInternetActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HolderActivity">
+        </activity>
     </application>
 
 </manifest>

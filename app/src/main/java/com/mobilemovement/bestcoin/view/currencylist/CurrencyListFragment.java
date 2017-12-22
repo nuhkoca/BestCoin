@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.currencylist;
+package com.mobilemovement.bestcoin.view.currencylist;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,32 +8,32 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
-import com.mobilemovement.bestcoin.currencylist.adapter.CurrencyAdapter;
-import com.mobilemovement.bestcoin.currencylist.network.FetchCurrencies;
 import com.mobilemovement.bestcoin.databinding.FragmentCurrencyListBinding;
 import com.mobilemovement.bestcoin.utils.OrientationUtils;
+import com.mobilemovement.bestcoin.utils.ToastUtils;
+import com.mobilemovement.bestcoin.view.callback.IResponseListener;
+import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
+import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
  */
 public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBinding> {
 
     private CurrencyAdapter currencyAdapter = new CurrencyAdapter();
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
+    public CurrencyListFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_currency_list, container, false);
 
-        return fragmentDataBinding.getRoot();
+
+        return Objects.requireNonNull(fragmentDataBinding).getRoot();
     }
 
     @Override
@@ -41,12 +41,17 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
         initUI(fragmentDataBinding.rvCoinList,
                 currencyAdapter);
 
-        FetchCurrencies.loadCurrencies(currencyAdapter);
+        FetchCurrencies.loadCurrencies(currencyAdapter, new IResponseListener() {
+            @Override
+            public void onFailed() {
+                ToastUtils.showErrorMessage(getActivity(), getString(R.string.error_message));
+            }
+        });
     }
 
     @Override
     public int getLayoutId() {
-        int configuration = OrientationUtils.detectOrientation(getActivity());
+        int configuration = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
 
         if (configuration == 1) {
             return GRID_LAYOUT_ID;

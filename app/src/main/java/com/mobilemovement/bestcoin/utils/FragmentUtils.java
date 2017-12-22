@@ -21,34 +21,18 @@ public class FragmentUtils {
      * A tag to able to find a Fragment {@param tag}
      */
 
-    public static void replaceFragment(HolderActivity holderActivity, Fragment newFragment) {
-        Fragment fragment = null;
-        Class fragmentClass;
+    public static void replaceFragment(HolderActivity holderActivity, Fragment fragment) {
+        String backStateName = fragment.getClass().getName();
 
-        fragmentClass = newFragment.getClass();
-        String backStackName = newFragment.getClass().getName();
+        FragmentManager manager = holderActivity.getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = holderActivity.getSupportFragmentManager();
-            boolean poppedFragment = fragmentManager.popBackStackImmediate(backStackName, 0);
-
-            if (!poppedFragment) {
-                fragmentManager.beginTransaction()
-                        .add(FRAGMENT_HOLDER_ID, fragment)
-                        .addToBackStack(backStackName)
-                        .commit();
-            }
-
-            fragmentManager.beginTransaction()
-                    .replace(FRAGMENT_HOLDER_ID, fragment)
-                    .addToBackStack(backStackName)
-                    .commit();
+        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) { //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(FRAGMENT_HOLDER_ID, fragment, backStateName);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(backStateName);
+            ft.commit();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.currencylist.adapter;
+package com.mobilemovement.bestcoin.view.currencylist.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -13,6 +13,7 @@ import com.mobilemovement.bestcoin.model.Result;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by nuhkoca on 4.12.2017.
@@ -37,7 +38,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
                 parent,
                 false);
 
-        return new ViewHolder(currencyListItemCardViewBinding.getRoot());
+        return new ViewHolder(Objects.requireNonNull(currencyListItemCardViewBinding).getRoot());
     }
 
     @Override

@@ -1,16 +1,14 @@
 package com.mobilemovement.bestcoin.base;
 
-
-import android.content.res.Configuration;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 
 
 /**
@@ -26,8 +24,13 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
 
     protected static final int LINEAR_LAYOUT_ID = 122;
 
-    private static final int SPAN_COUNT_2 = 2;
-    private static final int SPAN_COUNT_4 = 4;
+    protected static final int SPAN_COUNT_2 = 2;
+    protected static final int SPAN_COUNT_4 = 4;
+
+    protected Parcelable mListState;
+    protected RecyclerView.LayoutManager mLayoutManager;
+
+    protected static final String LIST_STATE_KEY = "recyclerview-list";
 
     protected void initUI(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         mRecyclerView = recyclerView;
@@ -35,15 +38,16 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
 
         switch (getLayoutId()) {
             case GRID_LAYOUT_ID:
-                mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),
-                        SPAN_COUNT_2));
+                mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_2);
+                mRecyclerView.setLayoutManager(mLayoutManager);
                 break;
             case GRID_LAYOUT_LAND_ID:
-                mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),
-                        SPAN_COUNT_4));
+                mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_4);
+                mRecyclerView.setLayoutManager(mLayoutManager);
                 break;
             case LINEAR_LAYOUT_ID:
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                mLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(mLayoutManager);
                 break;
             default:
                 break;
@@ -61,4 +65,37 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
     public abstract int getLayoutId();
 
     public abstract boolean setHasFixedSize();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        mListState = mLayoutManager.onSaveInstanceState();
+
+        outState.putParcelable(LIST_STATE_KEY, mListState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null)
+            mListState = savedInstanceState.getParcelable(LIST_STATE_KEY);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mListState != null) {
+            mLayoutManager.onRestoreInstanceState(mListState);
+        }
+    }
 }

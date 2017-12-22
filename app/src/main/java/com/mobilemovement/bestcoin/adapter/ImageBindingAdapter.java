@@ -16,6 +16,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
+import timber.log.Timber;
+
 /**
  * Created by nuhkoca on 9.12.2017.
  */
@@ -32,6 +34,8 @@ public class ImageBindingAdapter {
     public static void loadImagesFromAPI(ImageView imageView, String url, final ProgressBar progressBar) {
         if (!TextUtils.isEmpty(url)) {
             RequestOptions options = new RequestOptions()
+                    .override(120, 140)
+                    .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .skipMemoryCache(false);
 
@@ -41,6 +45,7 @@ public class ImageBindingAdapter {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            Timber.d("An error occured while loading the image");
                             progressBar.setVisibility(View.GONE);
                             return false;
                         }

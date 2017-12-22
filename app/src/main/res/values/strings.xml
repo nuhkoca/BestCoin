@@ -25,4 +25,18 @@
     <!-- Fragment Names -->
     <string name="fragment_coin_list">List of Coins</string>
 
+    <!-- No Internet Fragment texts -->
+    <string name="no_connection_text">No Connection</string>
+    <string name="no_connection_text2">No internet connection detected. Check your connection or try again.</string>
+    <string name="no_connection_btn_text">Try Again</string>
+
+    <!-- Toast message-->
+    <string name="error_message">An error occurred. Please check your internet connection and try again.</string>
+    <string name="success_message">An error occurred. Please check your internet connection and try again.</string>
+    <string name="warning_message">An error occurred. Please check your internet connection and try again.</string>
+    <string name="info_message">An error occurred. Please check your internet connection and try again.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

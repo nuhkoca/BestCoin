@@ -4,18 +4,19 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
+import com.mobilemovement.bestcoin.HolderActivity;
 import com.mobilemovement.bestcoin.R;
-import com.mobilemovement.bestcoin.currencylist.CurrencyListFragment;
 import com.mobilemovement.bestcoin.utils.CollapsingToolbarLayoutBackgroundUtils;
+import com.mobilemovement.bestcoin.utils.FragmentUtils;
 import com.mobilemovement.bestcoin.utils.TransparentUtils;
+import com.mobilemovement.bestcoin.view.currencylist.CurrencyListFragment;
+import com.mobilemovement.bestcoin.view.market.MarketFragment;
 
 /**
  * Created by nuhkoca on 3.12.2017.
@@ -44,7 +45,7 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
         mImageView = imageView;
 
-        CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background,this);
+        CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background, this);
 
         TransparentUtils.makeStatusBarTransparent(this);
     }
@@ -64,49 +65,46 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
-        Class fragmentClass = null;
+        int imageId = 0;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_fragment_1:
-                CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background,this);
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.currency_background;
+                fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_2:
-                CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.market_background,this);
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                fragment = new MarketFragment();
                 break;
             case R.id.nav_fragment_3:
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                //fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_4:
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                //fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_5:
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                //fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_6:
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                //fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_7:
-                fragmentClass = CurrencyListFragment.class;
+                imageId = R.drawable.market_background;
+                //fragment = new CurrencyListFragment();
                 break;
             default:
-
+                break;
         }
 
-        try {
-            if (fragmentClass != null) {
-                fragment = (Fragment) fragmentClass.newInstance();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, imageId, this);
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_holder, fragment)
-                .commit();
+        if (fragment != null) {
+            FragmentUtils.replaceFragment((HolderActivity) this, fragment);
+        }
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
