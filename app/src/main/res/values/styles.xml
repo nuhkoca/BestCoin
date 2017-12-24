@@ -6,11 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
-
 
     <!-- Launcher Theme -->
     <style name="AppTheme.Launcher">
@@ -22,19 +22,16 @@
         <item name="android:textColorSecondary">@color/colorWhite</item>
     </style>
 
-
     <!-- Drawer Arrow Style -->
     <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>
         <item name="color">@color/colorWhite</item>
     </style>
 
-
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
     <style name="CollapsingTextAppearance.Inverse" >
         <item name="android:textSize">30sp</item>
     </style>
-
 
     <style name="TextAppearance" parent="TextAppearance.AppCompat"/>
     <style name="TextAppearance.Header">

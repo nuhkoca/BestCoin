@@ -6,11 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.android.databinding.library.baseAdapters.BR;
 import com.mobilemovement.bestcoin.R;
+import com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener;
 import com.mobilemovement.bestcoin.databinding.CurrencyListItemCardViewBinding;
 import com.mobilemovement.bestcoin.model.Result;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,9 +22,12 @@ import java.util.Objects;
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHolder> {
 
     private List<Result> mResults;
+    final private IAdapterItemTouchListener mAdapterItemTouchListener;
 
-    public CurrencyAdapter() {
+    public CurrencyAdapter(IAdapterItemTouchListener iAdapterItemTouchListener) {
         mResults = new ArrayList<>();
+
+        mAdapterItemTouchListener = iAdapterItemTouchListener;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
 
     public void swapData(List<Result> result) {
         mResults = result;
+
         notifyDataSetChanged();
     }
 
@@ -68,7 +72,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
         }
 
         void bindViews(Result result) {
-            currencyListItemCardViewBinding.setResult(result);
+            currencyListItemCardViewBinding.setVariable(BR.result, result);
+            currencyListItemCardViewBinding.setVariable(BR.touchListener, mAdapterItemTouchListener);
             currencyListItemCardViewBinding.executePendingBindings();
         }
     }

@@ -1,9 +1,13 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <data>
-        <variable name="result" type="com.mobilemovement.bestcoin.model.Result"/>
-
-        <variable name="currencyResponse" type="com.mobilemovement.bestcoin.model.MarketResponse"/>
+        <variable name="result" 
+            type="com.mobilemovement.bestcoin.model.Result"/>
+        <variable name="currencyResponse" 
+            type="com.mobilemovement.bestcoin.model.MarketResponse" />
+        <variable
+            name="touchListener"
+            type="com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener" />
     </data>
 
 <LinearLayout
@@ -20,7 +24,8 @@
     app:cardCornerRadius="4dp"
     app:cardBackgroundColor="@android:color/white"
     app:cardElevation="4dp"
-    android:layout_margin="@dimen/dimension_8dp">
+    android:layout_margin="@dimen/dimension_8dp"
+    android:onClick="@{() -> touchListener.onTouched(result.getLogoUrl, result.marketCurrency, result.marketCurrencyLong, result.getActive)}">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +57,6 @@
     </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/robotoregular"

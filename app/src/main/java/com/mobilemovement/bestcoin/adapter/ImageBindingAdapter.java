@@ -3,11 +3,11 @@ package com.mobilemovement.bestcoin.adapter;
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-
+import com.mobilemovement.bestcoin.R;
 import timber.log.Timber;
 
 /**
@@ -23,6 +23,9 @@ import timber.log.Timber;
  */
 
 public class ImageBindingAdapter {
+
+    private static final int WIDTH = 120;
+    private static final int HEIGHT = 140;
 
     /**
     *  A value for binding image over URL {@param logoUrl
@@ -33,14 +36,8 @@ public class ImageBindingAdapter {
     @BindingAdapter({"logoUrl", "progressBar"})
     public static void loadImagesFromAPI(ImageView imageView, String url, final ProgressBar progressBar) {
         if (!TextUtils.isEmpty(url)) {
-            RequestOptions options = new RequestOptions()
-                    .override(120, 140)
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false);
-
             Glide.with(imageView.getContext())
-                    .applyDefaultRequestOptions(options)
+                    .applyDefaultRequestOptions(requestOptions(imageView))
                     .load(url)
                     .listener(new RequestListener<Drawable>() {
                         @Override
@@ -57,5 +54,14 @@ public class ImageBindingAdapter {
                         }
                     }).into(imageView);
         }
+    }
+
+    private static RequestOptions requestOptions(ImageView imageView) {
+        return new RequestOptions()
+                .override(WIDTH, HEIGHT)
+                .centerCrop()
+                .error(ContextCompat.getDrawable(imageView.getContext(), R.drawable.no_image))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .skipMemoryCache(false);
     }
 }

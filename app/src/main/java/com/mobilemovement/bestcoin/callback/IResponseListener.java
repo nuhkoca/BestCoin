@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.view.callback;
+package com.mobilemovement.bestcoin.callback;
 
 public interface IResponseListener {
     void onFailed();

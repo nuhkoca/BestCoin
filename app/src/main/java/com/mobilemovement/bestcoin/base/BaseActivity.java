@@ -2,6 +2,7 @@ package com.mobilemovement.bestcoin.base;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -28,10 +29,11 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
     protected ActionBarDrawerToggle mDrawerToggle;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
+    protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     protected Toolbar mToolbar;
     protected ImageView mImageView;
 
-    protected void initUI(Toolbar toolbar, DrawerLayout drawerLayout, NavigationView navigationView, ActionBarDrawerToggle actionBarDrawerToggle, ImageView imageView) {
+    protected void initUI(Toolbar toolbar, DrawerLayout drawerLayout, CollapsingToolbarLayout collapsingToolbarLayout, NavigationView navigationView, ActionBarDrawerToggle actionBarDrawerToggle, ImageView imageView) {
         mToolbar = toolbar;
         setSupportActionBar(toolbar);
 
@@ -45,11 +47,12 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
 
         mImageView = imageView;
 
+        mCollapsingToolbarLayout = collapsingToolbarLayout;
+
         CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, R.drawable.currency_background, this);
 
-        TransparentUtils.makeStatusBarTransparent(this);
+        TransparentUtils.makeNavigationBarTransparentOnly(this);
     }
-
 
     private void setupDrawerContent() {
         mNavigationView.setNavigationItemSelectedListener(
@@ -66,14 +69,17 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         int imageId = 0;
+        String collapsinToolbarLayoutTitle = null;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_fragment_1:
                 imageId = R.drawable.currency_background;
+                collapsinToolbarLayoutTitle = getString(R.string.fragment_coin_list);
                 fragment = new CurrencyListFragment();
                 break;
             case R.id.nav_fragment_2:
                 imageId = R.drawable.market_background;
+                collapsinToolbarLayoutTitle = getString(R.string.fragment_market);
                 fragment = new MarketFragment();
                 break;
             case R.id.nav_fragment_3:
@@ -100,6 +106,7 @@ public abstract class BaseActivity<B extends ViewDataBinding> extends AppCompatA
                 break;
         }
 
+        mCollapsingToolbarLayout.setTitle(collapsinToolbarLayoutTitle);
         CollapsingToolbarLayoutBackgroundUtils.changeBackground(mImageView, imageId, this);
 
         if (fragment != null) {

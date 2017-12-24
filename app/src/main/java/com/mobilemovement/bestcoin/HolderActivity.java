@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,9 +17,6 @@ import com.mobilemovement.bestcoin.network.activity.NoInternetActivity;
 import com.mobilemovement.bestcoin.utils.ConnectionUtils;
 import com.mobilemovement.bestcoin.utils.FragmentUtils;
 import com.mobilemovement.bestcoin.view.currencylist.CurrencyListFragment;
-
-import java.io.IOException;
-
 import timber.log.Timber;
 
 public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
@@ -34,22 +32,9 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
         Timber.plant(new Timber.DebugTree());
 
-        mActionBarDrawerToggle = setupDrawerToggle();
+        initThisUI();
 
-        initUI(activityDataBinding.ahToolbarLayout.toolbar,
-                activityDataBinding.dlHolderActivity,
-                activityDataBinding.ahNavViewLayout.nvItemHolder,
-                mActionBarDrawerToggle,
-                activityDataBinding.ahToolbarLayout.ivCtlBackground);
-
-        activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
-
-        boolean isConnected = false;
-        try {
-            isConnected = ConnectionUtils.pulse(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        boolean isConnected = ConnectionUtils.pulse(this);
 
         if (!isConnected) {
             Timber.d("No internet connection");
@@ -63,6 +48,21 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
         if (savedInstanceState == null)
             FragmentUtils.replaceFragment(this, mImitationFragmentOf);
+    }
+
+    private void initThisUI() {
+        mActionBarDrawerToggle = setupDrawerToggle();
+
+        initUI(activityDataBinding.ahToolbarLayout.toolbar,
+                activityDataBinding.dlHolderActivity,
+                activityDataBinding.ahToolbarLayout.ctlToolbarLayout,
+                activityDataBinding.ahNavViewLayout.nvItemHolder,
+                mActionBarDrawerToggle,
+                activityDataBinding.ahToolbarLayout.ivCtlBackground);
+
+        activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
+
+        makeNavigationBarColored();
     }
 
     @Override
@@ -94,11 +94,24 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
     @Override
     public void onBackPressed() {
         if (backPressed + TIME_DELAY > System.currentTimeMillis()) {
-            super.onBackPressed();
+            //System.exit(0);
+
+            int backStackCount = FragmentUtils.getBackStackEntryCount();
+
+            if (backStackCount > 0) {
+                FragmentUtils.removeAllFragmentsFromBackStack();
+                super.onBackPressed();
+            }
+
         } else {
             Toast.makeText(getBaseContext(), getString(R.string.twice_press_to_exit),
                     Toast.LENGTH_SHORT).show();
         }
+
         backPressed = System.currentTimeMillis();
+    }
+
+    private void makeNavigationBarColored() {
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.navBarColor));
     }
 }

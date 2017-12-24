@@ -10,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
+import com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener;
+import com.mobilemovement.bestcoin.callback.IResponseListener;
 import com.mobilemovement.bestcoin.databinding.FragmentCurrencyListBinding;
 import com.mobilemovement.bestcoin.utils.OrientationUtils;
 import com.mobilemovement.bestcoin.utils.ToastUtils;
-import com.mobilemovement.bestcoin.view.callback.IResponseListener;
 import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
 import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
 import java.util.Objects;
@@ -22,22 +23,22 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  *
  */
-public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBinding> {
+public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBinding> implements IAdapterItemTouchListener {
 
-    private CurrencyAdapter currencyAdapter = new CurrencyAdapter();
-
-    public CurrencyListFragment() {}
+    public CurrencyListFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_currency_list, container, false);
-
 
         return Objects.requireNonNull(fragmentDataBinding).getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        CurrencyAdapter currencyAdapter = new CurrencyAdapter(this);
+
         initUI(fragmentDataBinding.rvCoinList,
                 currencyAdapter);
 
@@ -63,5 +64,10 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     @Override
     public boolean setHasFixedSize() {
         return true;
+    }
+
+    @Override
+    public void onTouched(String logoUrl, String marketCurrency, String marketCurrencyLong, boolean isActive) {
+        ToastUtils.showInfoMessage(getActivity(), "Selected item is: " + marketCurrencyLong + " " + marketCurrency);
     }
 }
