@@ -36,9 +36,18 @@ public class FragmentUtils {
         }
     }
 
+    /**
+     *
+     * @return count of fragments that Fragment Manager holds.
+     */
+
     public static int getBackStackEntryCount() {
         return mFragmentManager.getBackStackEntryCount();
     }
+
+    /**
+     * remove all fragments from the backstack
+     */
 
     public static void removeAllFragmentsFromBackStack() {
         for (int i = 0; i < mFragmentManager.getBackStackEntryCount(); i++) {

@@ -9,7 +9,7 @@
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="match_parent"
             android:layout_height="380dp"
-            android:src="@drawable/owl" />
+            android:src="@drawable/owl"/>
 
         <TextView
             android:layout_width="wrap_content"

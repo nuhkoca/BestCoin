@@ -13,7 +13,8 @@
             android:id="@+id/apl_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true" >
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/ctl_toolbar_layout"
@@ -22,7 +23,8 @@
                 app:expandedTitleMarginBottom="94dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:expandedTitleTextAppearance="@style/CollapsingTextAppearance.Inverse"
-                app:contentScrim="?colorPrimary" >
+                app:contentScrim="?colorPrimary"
+                android:fitsSystemWindows="true">
 
                 <com.flaviofaria.kenburnsview.KenBurnsView
                     android:id="@+id/iv_ctl_background"
@@ -30,14 +32,16 @@
                     android:layout_height="match_parent"
                     android:tint="@color/colorTint"
                     android:scaleType="centerCrop"
-                    android:contentDescription="@string/toolbar_layout_image_holder" />
+                    android:contentDescription="@string/toolbar_layout_image_holder"
+                    android:fitsSystemWindows="true"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@null"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    android:fitsSystemWindows="true"/>
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
@@ -47,20 +51,13 @@
             android:layout_height="match_parent"
             android:scrollbars="none"
             app:behavior_overlapTop="78dp"
+            android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
 
             <FrameLayout
                 android:id="@+id/main_fragment_holder"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-
-            </RelativeLayout>
+                android:layout_height="wrap_content" />
 
         </android.support.v4.widget.NestedScrollView>
 

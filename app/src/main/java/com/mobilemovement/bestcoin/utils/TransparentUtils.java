@@ -16,19 +16,23 @@ public class TransparentUtils {
      *  Makes navigation bar transparent only with the {@param appCompatActivity
      */
 
-    public static void makeNavigationBarTransparentOnly(AppCompatActivity appCompatActivity){
-        Window w = appCompatActivity.getWindow();
+    public static void makeNavigationBarTransparentOnly(AppCompatActivity activity){
+        Window w = activity.getWindow();
+
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        w.setNavigationBarColor(ContextCompat.getColor(appCompatActivity.getApplicationContext(), R.color.navBarColor));
+        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        w.setNavigationBarColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.navBarColor));
     }
 
     /**
      *  Makes entire transparent with the {@param appCompatActivity
      */
 
-    public static void makeCompleteTransparent(AppCompatActivity appCompatActivity){
-        Window w = appCompatActivity.getWindow();
+    public static void makeCompleteTransparent(AppCompatActivity activity){
+        Window w = activity.getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }

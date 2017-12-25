@@ -19,7 +19,7 @@ public class NoInternetActivity extends AppCompatActivity {
 
         mActivityNoInternetBinding = DataBindingUtil.setContentView(this, R.layout.activity_no_internet);
 
-        TransparentUtils.makeStatusBarTransparent(this);
+        TransparentUtils.makeCompleteTransparent(this);
 
         mActivityNoInternetBinding.btnNoConnection.setOnClickListener(new View.OnClickListener() {
             @Override
