@@ -6,8 +6,10 @@ import com.mobilemovement.bestcoin.model.Result;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
 import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
@@ -51,7 +53,7 @@ public class FetchCurrencies {
                     @Override
                     public void onError(Throwable e) {
                         Timber.d(e.getMessage());
-                        iResponseListener.onFailed();
+                        iResponseListener.onFailure();
                     }
 
                     @Override
@@ -76,7 +78,9 @@ public class FetchCurrencies {
 
                         marketResponse.setResult(results);
                         currencyAdapter.swapData(marketResponse.getResult());
+
                         Timber.d("Fetched currency data");
+                        iResponseListener.onSuccess();
                     }
                 });
     }

@@ -1,5 +1,6 @@
 package com.mobilemovement.bestcoin.callback;
 
 public interface IResponseListener {
-    void onFailed();
+    void onFailure();
+    void onSuccess();
 }

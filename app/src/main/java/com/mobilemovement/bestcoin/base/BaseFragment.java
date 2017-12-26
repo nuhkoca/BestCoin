@@ -1,5 +1,6 @@
 package com.mobilemovement.bestcoin.base;
 
+import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -9,19 +10,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
-    protected B fragmentDataBinding;
-    protected RecyclerView mRecyclerView;
+    protected F fragmentDataBinding;
 
     protected static final int GRID_LAYOUT_ID = 120;
     protected static final int GRID_LAYOUT_LAND_ID = 121;
-
     protected static final int LINEAR_LAYOUT_ID = 122;
 
     protected static final int SPAN_COUNT_2 = 2;
@@ -32,45 +36,53 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
 
     protected static final String LIST_STATE_KEY = "recyclerview-list";
 
-    protected void initUI(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
-        mRecyclerView = recyclerView;
-        mRecyclerView.setNestedScrollingEnabled(false);
+    protected void initGenericUI() {
+        getRecyclerView().setNestedScrollingEnabled(false);
 
-        switch (getLayoutId()) {
+        switch (getLayoutManagerId()) {
             case GRID_LAYOUT_ID:
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_2);
-                mRecyclerView.setLayoutManager(mLayoutManager);
+                getRecyclerView().setLayoutManager(mLayoutManager);
                 break;
             case GRID_LAYOUT_LAND_ID:
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_4);
-                mRecyclerView.setLayoutManager(mLayoutManager);
+                getRecyclerView().setLayoutManager(mLayoutManager);
                 break;
             case LINEAR_LAYOUT_ID:
                 mLayoutManager = new LinearLayoutManager(getActivity());
-                mRecyclerView.setLayoutManager(mLayoutManager);
+                getRecyclerView().setLayoutManager(mLayoutManager);
                 break;
             default:
                 break;
         }
 
-        if (setHasFixedSize()) {
-            mRecyclerView.setHasFixedSize(true);
+        if (getHasFixedSize()) {
+            getRecyclerView().setHasFixedSize(true);
         } else {
-            mRecyclerView.setHasFixedSize(false);
+            getRecyclerView().setHasFixedSize(false);
         }
 
-        mRecyclerView.setAdapter(adapter);
+        getRecyclerView().setAdapter(getAdapter());
     }
-
-    public abstract int getLayoutId();
-
-    public abstract boolean setHasFixedSize();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setRetainInstance(true);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        fragmentDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+
+        return Objects.requireNonNull(fragmentDataBinding).getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initGenericUI();
     }
 
     @Override
@@ -98,4 +110,14 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
             mLayoutManager.onRestoreInstanceState(mListState);
         }
     }
+
+    public abstract int getLayoutManagerId();
+
+    public abstract int getLayoutId();
+
+    public abstract boolean getHasFixedSize();
+
+    public abstract RecyclerView getRecyclerView();
+
+    public abstract RecyclerView.Adapter getAdapter();
 }

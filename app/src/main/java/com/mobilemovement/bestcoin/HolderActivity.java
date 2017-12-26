@@ -1,38 +1,31 @@
 package com.mobilemovement.bestcoin;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.mobilemovement.bestcoin.base.BaseActivity;
 import com.mobilemovement.bestcoin.databinding.ActivityHolderBinding;
 import com.mobilemovement.bestcoin.network.activity.NoInternetActivity;
 import com.mobilemovement.bestcoin.utils.ConnectionUtils;
 import com.mobilemovement.bestcoin.utils.FragmentUtils;
 import com.mobilemovement.bestcoin.view.currencylist.CurrencyListFragment;
+
 import timber.log.Timber;
 
 public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
-    private ActionBarDrawerToggle mActionBarDrawerToggle;
-    private static final int TIME_DELAY = 2000;
     private static long backPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_holder);
-
-        Timber.plant(new Timber.DebugTree());
-
-        initThisUI();
 
         boolean isConnected = ConnectionUtils.pulse(this);
 
@@ -43,57 +36,18 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
             startActivity(noInternetIntent);
         }
 
-        Fragment mImitationFragmentOf;
-        mImitationFragmentOf = new CurrencyListFragment();
+       Fragment mImitationFragmentOf;
+       mImitationFragmentOf = new CurrencyListFragment();
 
         if (savedInstanceState == null)
             FragmentUtils.replaceFragment(this, mImitationFragmentOf);
     }
 
-    private void initThisUI() {
-        mActionBarDrawerToggle = setupDrawerToggle();
-
-        initUI(activityDataBinding.ahToolbarLayout.toolbar,
-                activityDataBinding.dlHolderActivity,
-                activityDataBinding.ahToolbarLayout.ctlToolbarLayout,
-                activityDataBinding.ahNavViewLayout.nvItemHolder,
-                mActionBarDrawerToggle,
-                activityDataBinding.ahToolbarLayout.ivCtlBackground);
-
-        activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
-
-        makeNavigationBarColored();
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        mActionBarDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mActionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @NonNull
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
-        // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, activityDataBinding.dlHolderActivity, activityDataBinding.ahToolbarLayout.toolbar, R.string.drawer_open, R.string.drawer_close);
-    }
-
     @Override
     public void onBackPressed() {
-        if (backPressed + TIME_DELAY > System.currentTimeMillis()) {
+        int timeDelay = getResources().getInteger(R.integer.time_delay);
+
+        if (backPressed + timeDelay > System.currentTimeMillis()) {
             //System.exit(0);
 
             int backStackCount = FragmentUtils.getBackStackEntryCount();
@@ -111,7 +65,33 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
         backPressed = System.currentTimeMillis();
     }
 
-    private void makeNavigationBarColored() {
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.navBarColor));
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_holder;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return activityDataBinding.ahToolbarLayout.toolbar;
+    }
+
+    @Override
+    protected DrawerLayout getDrawerLayout() {
+        return activityDataBinding.dlHolderActivity;
+    }
+
+    @Override
+    protected NavigationView getNavigationView() {
+        return activityDataBinding.ahNavViewLayout.nvItemHolder;
+    }
+
+    @Override
+    protected CollapsingToolbarLayout getCollapsingToolbarLayout() {
+        return activityDataBinding.ahToolbarLayout.ctlToolbarLayout;
+    }
+
+    @Override
+    protected ImageView getImageViewForCollapsingToolbarLayoutBackground() {
+        return activityDataBinding.ahToolbarLayout.ivCtlBackground;
     }
 }

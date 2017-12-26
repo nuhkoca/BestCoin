@@ -21,6 +21,7 @@
 
     <string name="all_rights_reserved" translatable="false">BestCoin © 2017</string>
     <string name="twice_press_to_exit">Press once again to exit</string>
+    <string name="loading_text">Loading…</string>
 
     <!-- Fragment Names -->
     <string name="fragment_coin_list">List of Coins</string>

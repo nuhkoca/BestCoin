@@ -9,8 +9,6 @@ import com.mobilemovement.bestcoin.utils.TransparentUtils;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final long DELAY_IN_SECONDS = 1500;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +19,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initMainActivity() {
+        int delayInSeconds = getResources().getInteger(R.integer.delay_in_seconds);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -28,6 +28,6 @@ public class SplashActivity extends AppCompatActivity {
                 coinListActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(coinListActivity);
             }
-        }, DELAY_IN_SECONDS);
+        }, delayInSeconds);
     }
 }
