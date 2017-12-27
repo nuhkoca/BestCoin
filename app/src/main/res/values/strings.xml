@@ -33,7 +33,7 @@
     <string name="no_connection_btn_text">Try Again</string>
 
     <!-- Toast message-->
-    <string name="error_message">An error occurred. Please check your internet connection and try again.</string>
+    <string name="no_connection_error_message">An error occurred. Please check your internet connection and try again.</string>
     <string name="success_message">An error occurred. Please check your internet connection and try again.</string>
     <string name="warning_message">An error occurred. Please check your internet connection and try again.</string>
     <string name="info_message">An error occurred. Please check your internet connection and try again.</string>

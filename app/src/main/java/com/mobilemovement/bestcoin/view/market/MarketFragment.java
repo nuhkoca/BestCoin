@@ -23,8 +23,8 @@ public class MarketFragment extends BaseFragment<FragmentMarketBinding> {
 
     FragmentMarketBinding mFragmentMarketBinding;
 
-    public MarketFragment() {}
-
+    public static MarketFragment newInstance() {
+        return new MarketFragment(); }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

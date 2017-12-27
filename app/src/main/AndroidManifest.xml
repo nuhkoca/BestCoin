@@ -15,21 +15,22 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.Launcher"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HolderActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".HolderActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".network.activity.NoInternetActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HolderActivity">
-        </activity>
+            android:parentActivityName=".HolderActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".view.currencylist.activity.CurrencyDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.mobilemovement.bestcoin.model;
+package com.mobilemovement.bestcoin.model.sharedmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

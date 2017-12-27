@@ -3,7 +3,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#feefa1"
+        android:background="@color/noInternetActivityColor"
         android:orientation="vertical">
 
         <pl.droidsonroids.gif.GifImageView

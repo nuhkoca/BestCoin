@@ -13,6 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.mobilemovement.bestcoin.R;
 
 import java.util.Objects;
 
@@ -23,6 +27,8 @@ import java.util.Objects;
 public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
     protected F fragmentDataBinding;
+    protected ProgressBar mPbLoading;
+    protected TextView mTvLoading;
 
     protected static final int GRID_LAYOUT_ID = 120;
     protected static final int GRID_LAYOUT_LAND_ID = 121;
@@ -37,6 +43,9 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
     protected static final String LIST_STATE_KEY = "recyclerview-list";
 
     protected void initGenericUI() {
+        mPbLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.pbLoading);
+        mTvLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.tvLoading);
+
         getRecyclerView().setNestedScrollingEnabled(false);
 
         switch (getLayoutManagerId()) {
@@ -78,11 +87,6 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
         fragmentDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
 
         return Objects.requireNonNull(fragmentDataBinding).getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initGenericUI();
     }
 
     @Override

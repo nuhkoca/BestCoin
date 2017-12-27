@@ -1,10 +1,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <data>
-        <variable name="result" 
-            type="com.mobilemovement.bestcoin.model.Result"/>
-        <variable name="currencyResponse" 
-            type="com.mobilemovement.bestcoin.model.MarketResponse" />
+        <variable
+            name="result"
+            type="com.mobilemovement.bestcoin.model.sharedmodel.Result" />
+        <variable
+            name="currencyResponse"
+            type="com.mobilemovement.bestcoin.model.sharedmodel.MarketResponse" />
         <variable
             name="touchListener"
             type="com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener" />
@@ -25,7 +27,7 @@
     app:cardBackgroundColor="@android:color/white"
     app:cardElevation="4dp"
     android:layout_margin="@dimen/dimension_8dp"
-    android:onClick="@{() -> touchListener.onTouched(result.getLogoUrl, result.marketCurrency, result.marketCurrencyLong, result.getActive)}">
+    android:onClick="@{() -> touchListener.onCurrencyTouch(result, ivCurrency)}">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +48,7 @@
             android:layout_centerInParent="true"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivCurrency"
             android:layout_width="120dp"
             android:layout_height="140dp"
             android:layout_centerInParent="true"

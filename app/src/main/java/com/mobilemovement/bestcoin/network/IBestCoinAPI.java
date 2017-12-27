@@ -1,6 +1,6 @@
 package com.mobilemovement.bestcoin.network;
 
-import com.mobilemovement.bestcoin.model.MarketResponse;
+import com.mobilemovement.bestcoin.model.sharedmodel.MarketResponse;
 
 import retrofit2.http.GET;
 import rx.Observable;

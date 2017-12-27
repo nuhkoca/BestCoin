@@ -2,15 +2,18 @@ package com.mobilemovement.bestcoin.view.currencylist.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.databinding.library.baseAdapters.BR;
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener;
 import com.mobilemovement.bestcoin.databinding.CurrencyListItemCardViewBinding;
-import com.mobilemovement.bestcoin.model.Result;
+import com.mobilemovement.bestcoin.model.sharedmodel.Result;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -75,6 +78,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
             currencyListItemCardViewBinding.setVariable(BR.result, result);
             currencyListItemCardViewBinding.setVariable(BR.touchListener, mAdapterItemTouchListener);
             currencyListItemCardViewBinding.executePendingBindings();
+
+            ViewCompat.setTransitionName(currencyListItemCardViewBinding.ivCurrency, "currency-profile");
         }
     }
 }

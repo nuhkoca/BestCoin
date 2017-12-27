@@ -1,8 +1,8 @@
 package com.mobilemovement.bestcoin.view.currencylist.network;
 
 import com.mobilemovement.bestcoin.callback.IResponseListener;
-import com.mobilemovement.bestcoin.model.MarketResponse;
-import com.mobilemovement.bestcoin.model.Result;
+import com.mobilemovement.bestcoin.model.sharedmodel.MarketResponse;
+import com.mobilemovement.bestcoin.model.sharedmodel.Result;
 import com.mobilemovement.bestcoin.network.ObservableHelper;
 import com.mobilemovement.bestcoin.network.RetrofitInterceptor;
 import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;

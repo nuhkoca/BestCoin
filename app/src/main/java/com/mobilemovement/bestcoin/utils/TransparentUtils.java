@@ -24,7 +24,7 @@ public class TransparentUtils {
         w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-        w.setNavigationBarColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.navBarColor));
+        w.setNavigationBarColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.homeNavBarColor));
     }
 
     /**

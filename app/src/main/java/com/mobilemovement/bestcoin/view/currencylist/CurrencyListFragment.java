@@ -1,26 +1,29 @@
 package com.mobilemovement.bestcoin.view.currencylist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseFragment;
 import com.mobilemovement.bestcoin.callback.IAdapterItemTouchListener;
 import com.mobilemovement.bestcoin.callback.IResponseListener;
 import com.mobilemovement.bestcoin.databinding.FragmentCurrencyListBinding;
+import com.mobilemovement.bestcoin.model.sharedmodel.Result;
 import com.mobilemovement.bestcoin.utils.OrientationUtils;
 import com.mobilemovement.bestcoin.utils.ToastUtils;
 import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
 import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
+import com.mobilemovement.bestcoin.view.currencylist.activity.CurrencyDetailsActivity;
 
 import java.util.Objects;
-
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,14 +31,17 @@ import timber.log.Timber;
  */
 public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBinding> implements IAdapterItemTouchListener {
 
-    CurrencyAdapter currencyAdapter;
+    private CurrencyAdapter mCurrencyAdapter;
 
-    public CurrencyListFragment() { }
+    public static CurrencyListFragment newInstance() {
+        return new CurrencyListFragment();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        currencyAdapter = new CurrencyAdapter(this);
+        mCurrencyAdapter = new CurrencyAdapter(this);
 
+        initGenericUI();
         initCall();
     }
 
@@ -67,24 +73,34 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        return currencyAdapter;
-    }
-
-    @Override
-    public void onTouched(String logoUrl, String marketCurrency, String marketCurrencyLong, boolean isActive) {
-        ToastUtils.showInfoMessage(getActivity(), "Selected item is: " + marketCurrencyLong + " " + marketCurrency);
+        return mCurrencyAdapter;
     }
 
     private void initCall() {
-        FetchCurrencies.loadCurrencies(currencyAdapter, new IResponseListener() {
+        FetchCurrencies.loadCurrencies(mCurrencyAdapter, new IResponseListener() {
             @Override
             public void onFailure() {
-                ToastUtils.showErrorMessage(getActivity(), getString(R.string.error_message));
+                ToastUtils.showErrorMessage(getActivity(), getString(R.string.no_connection_error_message));
             }
 
             @Override
             public void onSuccess() {
+                mPbLoading.setVisibility(View.GONE);
+                mTvLoading.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onCurrencyTouch(Result result, ImageView imageView) {
+        Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
+        detailsIntent.putExtra("result", result.getLogoUrl());
+        detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
+
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                Objects.requireNonNull(getActivity()),
+                imageView,
+                ViewCompat.getTransitionName(imageView));
+        startActivity(detailsIntent, optionsCompat.toBundle());
     }
 }

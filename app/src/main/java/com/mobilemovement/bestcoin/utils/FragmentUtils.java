@@ -29,9 +29,14 @@ public class FragmentUtils {
 
         if (!fragmentPopped && mFragmentManager.findFragmentByTag(backStateName) == null) { //fragment not in back stack, create it.
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.replace(FRAGMENT_HOLDER_ID, fragment, backStateName);
+            ft.add(FRAGMENT_HOLDER_ID, fragment, backStateName);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(backStateName);
+            ft.commit();
+        }else {
+            FragmentTransaction ft = mFragmentManager.beginTransaction();
+            ft.replace(FRAGMENT_HOLDER_ID, fragment, backStateName);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
     }
