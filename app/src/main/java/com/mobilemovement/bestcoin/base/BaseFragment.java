@@ -90,6 +90,14 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initGenericUI();
+        initUI();
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -115,13 +123,21 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
         }
     }
 
-    public abstract int getLayoutManagerId();
+    /**
+     *
+     * other methods to be overriden by fragments.
+     */
 
-    public abstract int getLayoutId();
+    protected abstract int getLayoutManagerId();
 
-    public abstract boolean getHasFixedSize();
+    protected abstract int getLayoutId();
 
-    public abstract RecyclerView getRecyclerView();
+    protected abstract boolean getHasFixedSize();
 
-    public abstract RecyclerView.Adapter getAdapter();
+    protected abstract RecyclerView getRecyclerView();
+
+    protected abstract RecyclerView.Adapter getAdapter();
+
+    protected abstract void initUI();
+
 }

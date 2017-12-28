@@ -24,7 +24,7 @@ import timber.log.Timber;
 
 public class FetchCurrencies {
 
-    private static final String BITCOIN_CONDITION  ="Bitcoin";
+    private static final String BITCOIN_CONDITION  ="Tether";
     
     /**
      *  Adapter to load currencies into RecyclerView {@param currencyAdapter

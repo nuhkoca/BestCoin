@@ -61,7 +61,7 @@ public class ImageBindingAdapter {
                 .override(WIDTH, HEIGHT)
                 .centerCrop()
                 .error(ContextCompat.getDrawable(imageView.getContext(), R.drawable.no_image))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .skipMemoryCache(false);
     }
 }

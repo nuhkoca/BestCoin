@@ -29,8 +29,8 @@
         <activity
             android:name=".network.activity.NoInternetActivity"
             android:parentActivityName=".HolderActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".view.currencylist.activity.CurrencyDetailsActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.currencylist.activity.CurrencyDetailsActivity" />
     </application>
 
 </manifest>

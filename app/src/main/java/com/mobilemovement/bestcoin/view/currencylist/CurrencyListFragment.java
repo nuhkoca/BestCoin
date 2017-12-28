@@ -38,14 +38,6 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mCurrencyAdapter = new CurrencyAdapter(this);
-
-        initGenericUI();
-        initCall();
-    }
-
-    @Override
     public int getLayoutManagerId() {
         int configuration = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
 
@@ -73,7 +65,14 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
 
     @Override
     public RecyclerView.Adapter getAdapter() {
+        mCurrencyAdapter = new CurrencyAdapter(this);
+
         return mCurrencyAdapter;
+    }
+
+    @Override
+    protected void initUI() {
+        initCall();
     }
 
     private void initCall() {

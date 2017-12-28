@@ -21,8 +21,17 @@ public abstract class BaseActivity<A extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         activityDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
 
+        initUI();
+
         Timber.plant(new Timber.DebugTree());
     }
 
+    /**
+     *
+     * other methods to be overriden by activities.
+     */
+
     protected abstract int getLayoutId();
+
+    protected abstract void initUI();
 }

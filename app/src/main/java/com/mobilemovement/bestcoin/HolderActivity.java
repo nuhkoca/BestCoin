@@ -31,28 +31,6 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
     private ActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setSupportActionBar(activityDataBinding.ahToolbarLayout.toolbar);
-
-        initNavigationDrawerUI();
-
-        boolean isConnected = ConnectionUtils.pulse(this);
-
-        if (!isConnected) {
-            Timber.d("No internet connection");
-
-            Intent noInternetIntent = new Intent(HolderActivity.this, NoInternetActivity.class);
-            startActivity(noInternetIntent);
-        } else {
-            Fragment mImitationFragmentOf;
-            mImitationFragmentOf = CurrencyListFragment.newInstance();
-
-            FragmentUtils.replaceFragment(this, mImitationFragmentOf);
-        }
-    }
-
-    @Override
     public void onBackPressed() {
         int timeDelay = getResources().getInteger(R.integer.time_delay);
 
@@ -78,6 +56,28 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_holder;
+    }
+
+    @Override
+    protected void initUI() {
+        setSupportActionBar(activityDataBinding.ahToolbarLayout.toolbar);
+
+        initNavigationDrawerUI();
+
+        boolean isConnected = ConnectionUtils.pulse(this);
+
+        if (!isConnected) {
+            Timber.d("No internet connection");
+
+            Intent noInternetIntent = new Intent(HolderActivity.this, NoInternetActivity.class);
+            startActivity(noInternetIntent);
+        } else {
+            Fragment mImitationFragmentOf;
+            mImitationFragmentOf = CurrencyListFragment.newInstance();
+
+            FragmentUtils.replaceFragment(this, mImitationFragmentOf);
+        }
+
     }
 
     @Override
