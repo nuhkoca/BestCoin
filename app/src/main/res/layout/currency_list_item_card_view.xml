@@ -49,8 +49,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivCurrency"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_centerInParent="true"
             android:scaleType="centerCrop"
             android:contentDescription="@string/card_view_image_holder"

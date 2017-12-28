@@ -24,11 +24,12 @@ import timber.log.Timber;
 
 public class FetchCurrencies {
 
-    private static final String BITCOIN_CONDITION  ="Tether";
-    
+    private static final String BITCOIN_CONDITION = "Tether";
+
     /**
-     *  Adapter to load currencies into RecyclerView {@param currencyAdapter
-     **/
+     * @param currencyAdapter   to load data
+     * @param iResponseListener to pass some events
+     */
 
     public static void loadCurrencies(final CurrencyAdapter currencyAdapter, final IResponseListener iResponseListener) {
         final Retrofit retrofit = RetrofitInterceptor.build();
@@ -48,7 +49,8 @@ public class FetchCurrencies {
                 })
                 .subscribe(new Subscriber<MarketResponse>() {
                     @Override
-                    public void onCompleted() { }
+                    public void onCompleted() {
+                    }
 
                     @Override
                     public void onError(Throwable e) {

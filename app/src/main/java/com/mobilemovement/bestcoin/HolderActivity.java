@@ -16,9 +16,10 @@ import android.widget.Toast;
 import com.mobilemovement.bestcoin.base.BaseActivity;
 import com.mobilemovement.bestcoin.databinding.ActivityHolderBinding;
 import com.mobilemovement.bestcoin.network.activity.NoInternetActivity;
-import com.mobilemovement.bestcoin.utils.CollapsingToolbarLayoutBackgroundUtils;
+import com.mobilemovement.bestcoin.utils.BackgroundUtils;
 import com.mobilemovement.bestcoin.utils.ConnectionUtils;
 import com.mobilemovement.bestcoin.utils.FragmentUtils;
+import com.mobilemovement.bestcoin.utils.OrientationUtils;
 import com.mobilemovement.bestcoin.utils.TransparentUtils;
 import com.mobilemovement.bestcoin.view.currencylist.CurrencyListFragment;
 import com.mobilemovement.bestcoin.view.market.MarketFragment;
@@ -29,6 +30,28 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
 
     private static long backPressed;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
+
+    @Override
+    protected void initUI() {
+        setSupportActionBar(activityDataBinding.mainToolbarLayout.toolbar);
+
+        initNavigationDrawerUI();
+
+        boolean isConnected = ConnectionUtils.pulse(this);
+
+        if (!isConnected) {
+            Timber.d("No internet connection");
+
+            Intent noInternetIntent = new Intent(HolderActivity.this, NoInternetActivity.class);
+            startActivity(noInternetIntent);
+        } else {
+            Fragment mImitationFragmentOf;
+            mImitationFragmentOf = CurrencyListFragment.newInstance();
+
+            FragmentUtils.replaceFragment(this, mImitationFragmentOf);
+        }
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -59,28 +82,6 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
     }
 
     @Override
-    protected void initUI() {
-        setSupportActionBar(activityDataBinding.ahToolbarLayout.toolbar);
-
-        initNavigationDrawerUI();
-
-        boolean isConnected = ConnectionUtils.pulse(this);
-
-        if (!isConnected) {
-            Timber.d("No internet connection");
-
-            Intent noInternetIntent = new Intent(HolderActivity.this, NoInternetActivity.class);
-            startActivity(noInternetIntent);
-        } else {
-            Fragment mImitationFragmentOf;
-            mImitationFragmentOf = CurrencyListFragment.newInstance();
-
-            FragmentUtils.replaceFragment(this, mImitationFragmentOf);
-        }
-
-    }
-
-    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
@@ -100,8 +101,12 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * exclusive methods
+     */
+
     private void setupDrawerContent() {
-        activityDataBinding.ahNavViewLayout.nvItemHolder.setNavigationItemSelectedListener(
+        activityDataBinding.mainNavViewLayout.nvItemHolder.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -117,8 +122,13 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
         int imageId = 0;
         String collapsingToolbarLayoutTitle = null;
 
-        activityDataBinding.ahToolbarLayout.pbLoading.setVisibility(View.VISIBLE);
-        activityDataBinding.ahToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
+        int orientation = OrientationUtils.detectOrientation(this);
+
+        if (orientation == 2)
+            activityDataBinding.mainToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
+        else
+            activityDataBinding.mainToolbarLayout.pbLoading.setVisibility(View.VISIBLE);
+            activityDataBinding.mainToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
 
         switch (menuItem.getItemId()) {
             case R.id.nav_fragment_1:
@@ -155,8 +165,8 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
                 break;
         }
 
-        activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(collapsingToolbarLayoutTitle);
-        CollapsingToolbarLayoutBackgroundUtils.changeBackground(activityDataBinding.ahToolbarLayout.ivCtlBackground, imageId, this);
+        activityDataBinding.mainToolbarLayout.ctlToolbarLayout.setTitle(collapsingToolbarLayoutTitle);
+        BackgroundUtils.changeBackgroundImage(activityDataBinding.mainToolbarLayout.ivCtlBackground, imageId, this);
 
         if (fragment != null) {
             FragmentUtils.replaceFragment(this, fragment);
@@ -167,18 +177,18 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
         // Set action bar title
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
-        activityDataBinding.dlHolderActivity.closeDrawers();
+        activityDataBinding.mainDrawerLayout.closeDrawers();
     }
 
     private void initNavigationDrawerUI() {
         setupDrawerContent();
 
         mActionBarDrawerToggle = setupDrawerToggle();
-        activityDataBinding.dlHolderActivity.addDrawerListener(mActionBarDrawerToggle);
+        activityDataBinding.mainDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 
-        CollapsingToolbarLayoutBackgroundUtils.changeBackground(activityDataBinding.ahToolbarLayout.ivCtlBackground, R.drawable.currency_background, this);
+        BackgroundUtils.changeBackgroundImage(activityDataBinding.mainToolbarLayout.ivCtlBackground, R.drawable.currency_background, this);
 
-        activityDataBinding.ahToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
+        activityDataBinding.mainToolbarLayout.ctlToolbarLayout.setTitle(getString(R.string.fragment_coin_list));
         TransparentUtils.makeNavigationBarTransparentOnly(this);
         makeNavigationBarColored();
     }
@@ -186,7 +196,7 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
     private ActionBarDrawerToggle setupDrawerToggle() {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
         // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, activityDataBinding.dlHolderActivity, activityDataBinding.ahToolbarLayout.toolbar, R.string.drawer_open, R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, activityDataBinding.mainDrawerLayout, activityDataBinding.mainToolbarLayout.toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     private void makeNavigationBarColored() {

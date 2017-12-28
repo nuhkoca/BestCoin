@@ -1,6 +1,5 @@
 package com.mobilemovement.bestcoin.network.activity;
 
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -14,18 +13,16 @@ import com.mobilemovement.bestcoin.utils.TransparentUtils;
 public class NoInternetActivity extends BaseActivity<ActivityNoInternetBinding> implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.activity_no_internet;
+    }
 
+    @Override
+    protected void initUI() {
         TransparentUtils.makeCompleteTransparent(this);
         makeNavigationBarColored();
 
         activityDataBinding.btnNoConnection.setOnClickListener(this);
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_no_internet;
     }
 
     @Override

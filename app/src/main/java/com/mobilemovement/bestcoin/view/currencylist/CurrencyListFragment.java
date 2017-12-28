@@ -1,9 +1,6 @@
 package com.mobilemovement.bestcoin.view.currencylist;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
@@ -19,9 +16,9 @@ import com.mobilemovement.bestcoin.databinding.FragmentCurrencyListBinding;
 import com.mobilemovement.bestcoin.model.sharedmodel.Result;
 import com.mobilemovement.bestcoin.utils.OrientationUtils;
 import com.mobilemovement.bestcoin.utils.ToastUtils;
+import com.mobilemovement.bestcoin.view.currencylist.activity.CurrencyDetailsActivity;
 import com.mobilemovement.bestcoin.view.currencylist.adapter.CurrencyAdapter;
 import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
-import com.mobilemovement.bestcoin.view.currencylist.activity.CurrencyDetailsActivity;
 
 import java.util.Objects;
 
@@ -35,17 +32,6 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
 
     public static CurrencyListFragment newInstance() {
         return new CurrencyListFragment();
-    }
-
-    @Override
-    public int getLayoutManagerId() {
-        int configuration = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
-
-        if (configuration == 1) {
-            return GRID_LAYOUT_ID;
-        } else {
-            return GRID_LAYOUT_LAND_ID;
-        }
     }
 
     @Override
@@ -75,6 +61,20 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
         initCall();
     }
 
+    @Override
+    public void onCurrencyTouch(Result result, ImageView imageView) {
+        Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
+        detailsIntent.putExtra("result", result.getLogoUrl());
+        detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
+
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(
+                Objects.requireNonNull(getActivity()),
+                imageView,
+                ViewCompat.getTransitionName(imageView));
+        startActivity(detailsIntent, optionsCompat.toBundle());
+    }
+
     private void initCall() {
         FetchCurrencies.loadCurrencies(mCurrencyAdapter, new IResponseListener() {
             @Override
@@ -84,22 +84,14 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
 
             @Override
             public void onSuccess() {
-                mPbLoading.setVisibility(View.GONE);
-                mTvLoading.setVisibility(View.GONE);
+                int orientation = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
+
+                if (orientation == 2)
+                    mTvLoading.setVisibility(View.GONE);
+                else
+                    mPbLoading.setVisibility(View.GONE);
+                    mTvLoading.setVisibility(View.GONE);
             }
         });
-    }
-
-    @Override
-    public void onCurrencyTouch(Result result, ImageView imageView) {
-        Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
-        detailsIntent.putExtra("result", result.getLogoUrl());
-        detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
-
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                Objects.requireNonNull(getActivity()),
-                imageView,
-                ViewCompat.getTransitionName(imageView));
-        startActivity(detailsIntent, optionsCompat.toBundle());
     }
 }

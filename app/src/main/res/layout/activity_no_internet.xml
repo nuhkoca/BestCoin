@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.constraint.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/noInternetActivityColor"
         android:orientation="vertical">
 
         <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gifImageView"
+            android:id="@+id/iv_gif"
             android:layout_width="match_parent"
             android:layout_height="380dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/owl"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/owl" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_no_connection_short"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/robotoregular"
             android:letterSpacing="0.1"
             android:text="@string/no_connection_text"
             android:textColor="@color/noInternetTextColor"
             android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_no_connection_long"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -48,45 +35,29 @@
             android:fontFamily="@font/robotoregular"
             android:gravity="center"
             android:letterSpacing="0.1"
-            android:paddingLeft="35dp"
-            android:paddingRight="35dp"
             android:text="@string/no_connection_text2"
             android:textColor="@color/noInternetTextColor"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_no_connection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:background="@drawable/button_shape"
             android:elevation="6dp"
             android:gravity="center"
+            android:layout_marginTop="16dp"
             android:paddingBottom="10dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:paddingTop="10dp"
             android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
             android:text="@string/no_connection_btn_text"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
             android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:textStyle="bold" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>

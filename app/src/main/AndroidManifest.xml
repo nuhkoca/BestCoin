@@ -30,7 +30,9 @@
             android:name=".network.activity.NoInternetActivity"
             android:parentActivityName=".HolderActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.currencylist.activity.CurrencyDetailsActivity" />
+        <activity android:name=".view.currencylist.activity.CurrencyDetailsActivity"
+            android:theme="@style/AppTheme.Transition"
+            android:parentActivityName=".HolderActivity"/>
     </application>
 
 </manifest>

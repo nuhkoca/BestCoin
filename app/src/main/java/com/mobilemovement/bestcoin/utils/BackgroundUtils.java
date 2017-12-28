@@ -9,8 +9,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
  * Created by nuhkoca on 17.12.2017.
  */
 
-public class CollapsingToolbarLayoutBackgroundUtils {
-    public static void changeBackground(ImageView imageView, int imageId, Context context) {
+public class BackgroundUtils {
+    public static void changeBackgroundImage(ImageView imageView, int imageId, Context context) {
         DrawableTransitionOptions drawableTransitionOptions = new DrawableTransitionOptions()
                 .crossFade(100);
 

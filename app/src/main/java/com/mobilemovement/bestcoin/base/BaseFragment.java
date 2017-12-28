@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mobilemovement.bestcoin.R;
+import com.mobilemovement.bestcoin.utils.OrientationUtils;
 
 import java.util.Objects;
 
@@ -30,12 +31,11 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
     protected ProgressBar mPbLoading;
     protected TextView mTvLoading;
 
+    protected int orientationType;
+
     protected static final int GRID_LAYOUT_ID = 120;
     protected static final int GRID_LAYOUT_LAND_ID = 121;
     protected static final int LINEAR_LAYOUT_ID = 122;
-
-    protected static final int SPAN_COUNT_2 = 2;
-    protected static final int SPAN_COUNT_4 = 4;
 
     protected Parcelable mListState;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -48,22 +48,21 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
         getRecyclerView().setNestedScrollingEnabled(false);
 
-        switch (getLayoutManagerId()) {
+        switch (getOrientationType()) {
             case GRID_LAYOUT_ID:
-                mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_2);
-                getRecyclerView().setLayoutManager(mLayoutManager);
+                mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_2));
                 break;
             case GRID_LAYOUT_LAND_ID:
-                mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_4);
-                getRecyclerView().setLayoutManager(mLayoutManager);
+                mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_4));
                 break;
             case LINEAR_LAYOUT_ID:
                 mLayoutManager = new LinearLayoutManager(getActivity());
-                getRecyclerView().setLayoutManager(mLayoutManager);
                 break;
             default:
                 break;
         }
+
+        getRecyclerView().setLayoutManager(mLayoutManager);
 
         if (getHasFixedSize()) {
             getRecyclerView().setHasFixedSize(true);
@@ -123,12 +122,19 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        mListState = null;
+        mLayoutManager = null;
+        mPbLoading = null;
+        mTvLoading = null;
+
+        super.onDestroy();
+    }
+
     /**
-     *
      * other methods to be overriden by fragments.
      */
-
-    protected abstract int getLayoutManagerId();
 
     protected abstract int getLayoutId();
 
@@ -140,4 +146,19 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
     protected abstract void initUI();
 
+    private int getOrientationType() {
+        int screenMode = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
+
+        switch (screenMode) {
+            case 1:
+                orientationType = GRID_LAYOUT_ID;
+                return orientationType;
+            case 2:
+                orientationType = GRID_LAYOUT_LAND_ID;
+                return orientationType;
+            default:
+                orientationType = LINEAR_LAYOUT_ID;
+                return orientationType;
+        }
+    }
 }

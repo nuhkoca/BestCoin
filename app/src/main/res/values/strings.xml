@@ -6,7 +6,8 @@
     <string name="splash_screen_icon_holder" translatable="false">splash-screen-icon-holder</string>
     <string name="card_view_image_holder" translatable="false">card_view_image_holder</string>
     <string name="toolbar_layout_image_holder" translatable="false">toolbar_layout_image_holder</string>
-    <string name="nav_header_image_holder"> translatable="false"nav_header_image_holder</string>
+    <string name="nav_header_image_holder" translatable="false">nav_header_image_holder</string>
+    <string name="currency_details_logo" translatable="false">currency_details_logo</string>
 
     <!-- Drawer Items -->
     <string name="drawer_open" translatable="false">Open navigation drawer</string>
@@ -26,11 +27,10 @@
     <!-- Fragment Names -->
     <string name="fragment_coin_list">List of Coins</string>
     <string name="fragment_market">Markets</string>
-
-    <!-- No Internet Fragment texts -->
     <string name="no_connection_text">No Connection</string>
     <string name="no_connection_text2">No internet connection detected. Check your connection or try again.</string>
     <string name="no_connection_btn_text">Try Again</string>
+    <string name="fragment_details_text">Detaıls</string>
 
     <!-- Toast message-->
     <string name="no_connection_error_message">An error occurred. Please check your internet connection and try again.</string>

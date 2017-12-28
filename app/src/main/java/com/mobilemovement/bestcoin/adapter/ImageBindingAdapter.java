@@ -24,8 +24,8 @@ import timber.log.Timber;
 
 public class ImageBindingAdapter {
 
-    private static final int WIDTH = 120;
-    private static final int HEIGHT = 140;
+    private static final int WIDTH = 96;
+    private static final int HEIGHT = 96;
 
     /**
     *  A value for binding image over URL {@param logoUrl
