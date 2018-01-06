@@ -1,6 +1,5 @@
 package com.mobilemovement.bestcoin.network.activity;
 
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.mobilemovement.bestcoin.R;
@@ -20,7 +19,6 @@ public class NoInternetActivity extends BaseActivity<ActivityNoInternetBinding> 
     @Override
     protected void initUI() {
         TransparentUtils.makeCompleteTransparent(this);
-        makeNavigationBarColored();
 
         activityDataBinding.btnNoConnection.setOnClickListener(this);
     }
@@ -34,10 +32,6 @@ public class NoInternetActivity extends BaseActivity<ActivityNoInternetBinding> 
         } else {
             super.onBackPressed();
         }
-    }
-
-    private void makeNavigationBarColored() {
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.noInternetActivityColor));
     }
 
     @Override
