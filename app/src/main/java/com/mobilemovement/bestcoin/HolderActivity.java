@@ -2,6 +2,7 @@ package com.mobilemovement.bestcoin;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -128,7 +130,7 @@ public class HolderActivity extends BaseActivity<ActivityHolderBinding> {
             activityDataBinding.mainToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
         else
             activityDataBinding.mainToolbarLayout.pbLoading.setVisibility(View.VISIBLE);
-            activityDataBinding.mainToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
+        activityDataBinding.mainToolbarLayout.tvLoading.setVisibility(View.VISIBLE);
 
         switch (menuItem.getItemId()) {
             case R.id.nav_fragment_1:

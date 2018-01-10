@@ -66,6 +66,8 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
                         return false;
                     }
                 }).into(activityDataBinding.ivCurrencyDetailLogo);
+
+        activityDataBinding.tvCurrencyDetailCurrencyLongName.setText(extras.getString("long-name"));
     }
 
     @Override

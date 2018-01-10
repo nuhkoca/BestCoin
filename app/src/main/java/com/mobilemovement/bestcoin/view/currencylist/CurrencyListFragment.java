@@ -65,6 +65,7 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     public void onCurrencyTouch(Result result, ImageView imageView) {
         Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
         detailsIntent.putExtra("result", result.getLogoUrl());
+        detailsIntent.putExtra("long-name", result.getBaseCurrencyLong());
         detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.

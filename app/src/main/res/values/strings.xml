@@ -38,6 +38,11 @@
     <string name="warning_message">An error occurred. Please check your internet connection and try again.</string>
     <string name="info_message">An error occurred. Please check your internet connection and try again.</string>
 
+    <!-- Detail Fragment Texts -->
+    <string name="currency_detail_market_currency">Market Currency:</string>
+    <string name="currency_detail_market_name">Market Name:</string>
+    <string name="currency_detail_is_active">Is Active:</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
