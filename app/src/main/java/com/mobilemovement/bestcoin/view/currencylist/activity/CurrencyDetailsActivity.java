@@ -1,23 +1,28 @@
 package com.mobilemovement.bestcoin.view.currencylist.activity;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mobilemovement.bestcoin.R;
 import com.mobilemovement.bestcoin.base.BaseActivity;
+import com.mobilemovement.bestcoin.bindadapter.module.GlideApp;
 import com.mobilemovement.bestcoin.databinding.ActivityCurrencyDetailsBinding;
 import com.mobilemovement.bestcoin.utils.TransparentUtils;
+import com.mobilemovement.bestcoin.view.currencylist.CurrencyDetailsHolderFragment;
 
 import java.util.Objects;
 
@@ -27,6 +32,7 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
     private boolean mIsAvatarShown = true;
 
     private int mMaxScrollSize;
+    private Bundle extras;
 
     @Override
     protected void initUI() {
@@ -35,39 +41,21 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
 
         supportPostponeEnterTransition();
 
-        activityDataBinding.aplCurrencyDetails.addOnOffsetChangedListener(this);
-
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null)
             actionBar.setDisplayShowTitleEnabled(false);
 
+        activityDataBinding.aplCurrencyDetails.addOnOffsetChangedListener(this);
         activityDataBinding.toolbarCurrencyDetails.setNavigationOnClickListener(this);
+        extras = getIntent().getExtras();
 
-        Bundle extras = getIntent().getExtras();
-        String logoUrl = Objects.requireNonNull(extras).getString("result");
+        activityDataBinding.aplCurrencyDetails.setBackgroundResource(R.drawable.currency_background);
 
-        String imageTransitionName = extras.getString("transition-name");
-        Objects.requireNonNull(activityDataBinding).ivCurrencyDetailLogo.setTransitionName(imageTransitionName);
-
-        Glide.with(this)
-                .load(logoUrl)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        supportStartPostponedEnterTransition();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-
-                        scheduleStartPostponedTransition(activityDataBinding.ivCurrencyDetailLogo);
-                        return false;
-                    }
-                }).into(activityDataBinding.ivCurrencyDetailLogo);
-
-        activityDataBinding.tvCurrencyDetailCurrencyLongName.setText(extras.getString("long-name"));
+        loadCurrencyIcon();
+        applyTransition(extras);
+        loadMarketCurrencyLong();
+        handleTabLayoutProcess();
     }
 
     @Override
@@ -105,6 +93,13 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
                     .start();
         }
 
+        int scrollRange = appBarLayout.getTotalScrollRange();
+
+        if (scrollRange + verticalOffset == 0) {
+            activityDataBinding.aplCurrencyDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        } else if (scrollRange + verticalOffset > 50){
+            activityDataBinding.aplCurrencyDetails.setBackgroundResource(R.drawable.currency_background);
+        }
     }
 
     @Override
@@ -142,5 +137,70 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
                         return true;
                     }
                 });
+    }
+
+    private void loadCurrencyIcon(){
+        GlideApp.with(this)
+                .asBitmap()
+                .load(loadImageUrl(extras))
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+
+                        scheduleStartPostponedTransition(activityDataBinding.ivCurrencyDetailLogo);
+                        return false;
+                    }
+                }).into(activityDataBinding.ivCurrencyDetailLogo);
+    }
+
+    private String loadImageUrl(Bundle extras){
+        return extras.getString("image");
+    }
+
+    private void applyTransition(Bundle extras){
+        String imageTransitionName = extras.getString("transition-name");
+        Objects.requireNonNull(activityDataBinding).ivCurrencyDetailLogo.setTransitionName(imageTransitionName);
+    }
+
+    private void loadMarketCurrencyLong(){
+        activityDataBinding.tvCurrencyDetailCurrencyLongName.setText(extras.getString("long-name"));
+    }
+
+    private void handleTabLayoutProcess(){
+        activityDataBinding.vpCurrencyDetail.setAdapter(new TabsAdapter(getSupportFragmentManager()));
+        activityDataBinding.tlCurrencyDetail.setupWithViewPager(activityDataBinding.vpCurrencyDetail);
+        activityDataBinding.tlCurrencyDetail.setTabTextColors(
+                ContextCompat.getColor(this, R.color.colorWhite),
+                ContextCompat.getColor(this, R.color.colorWhite)
+        );
+    }
+
+    private class TabsAdapter extends FragmentPagerAdapter {
+        private static final int TAB_COUNT = 1;
+
+        TabsAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public int getCount() {
+            return TAB_COUNT;
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return CurrencyDetailsHolderFragment.newInstance(extras);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Details";
+        }
     }
 }

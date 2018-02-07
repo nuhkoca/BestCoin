@@ -42,37 +42,6 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
     protected static final String LIST_STATE_KEY = "recyclerview-list";
 
-    protected void initGenericUI() {
-        mPbLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.pbLoading);
-        mTvLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.tvLoading);
-
-        getRecyclerView().setNestedScrollingEnabled(false);
-
-        switch (getOrientationType()) {
-            case GRID_LAYOUT_ID:
-                mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_2));
-                break;
-            case GRID_LAYOUT_LAND_ID:
-                mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_4));
-                break;
-            case LINEAR_LAYOUT_ID:
-                mLayoutManager = new LinearLayoutManager(getActivity());
-                break;
-            default:
-                break;
-        }
-
-        getRecyclerView().setLayoutManager(mLayoutManager);
-
-        if (getHasFixedSize()) {
-            getRecyclerView().setHasFixedSize(true);
-        } else {
-            getRecyclerView().setHasFixedSize(false);
-        }
-
-        getRecyclerView().setAdapter(getAdapter());
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +114,41 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
     protected abstract RecyclerView.Adapter getAdapter();
 
     protected abstract void initUI();
+
+    protected void initGenericUI() {
+        mPbLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.pbLoading);
+        mTvLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.tvLoading);
+
+        if (getRecyclerView() != null) {
+            getRecyclerView().setNestedScrollingEnabled(false);
+
+            switch (getOrientationType()) {
+                case GRID_LAYOUT_ID:
+                    mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_2));
+                    break;
+                case GRID_LAYOUT_LAND_ID:
+                    mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_4));
+                    break;
+                case LINEAR_LAYOUT_ID:
+                    mLayoutManager = new LinearLayoutManager(getActivity());
+                    break;
+                default:
+                    break;
+            }
+
+            getRecyclerView().setLayoutManager(mLayoutManager);
+
+            if (getHasFixedSize()) {
+                getRecyclerView().setHasFixedSize(true);
+            } else {
+                getRecyclerView().setHasFixedSize(false);
+            }
+
+            if (getAdapter() != null) {
+                getRecyclerView().setAdapter(getAdapter());
+            }
+        }
+    }
 
     private int getOrientationType() {
         int screenMode = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));

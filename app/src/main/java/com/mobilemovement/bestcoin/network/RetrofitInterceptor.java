@@ -20,6 +20,7 @@ public class RetrofitInterceptor {
     public static Retrofit build() {
         Gson gson = new GsonBuilder()
                 .setLenient()
+                .serializeNulls()
                 .create();
 
         return new Retrofit.Builder()

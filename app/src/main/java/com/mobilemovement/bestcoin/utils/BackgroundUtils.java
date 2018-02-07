@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
-import com.mobilemovement.bestcoin.adapter.module.GlideApp;
+import com.mobilemovement.bestcoin.bindadapter.module.GlideApp;
 
 /**
  * Created by nuhkoca on 17.12.2017.
@@ -39,7 +39,7 @@ public class BackgroundUtils {
 
     private static RequestOptions requestOptions() {
         return new RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .override(WIDTH, HEIGHT);
     }
 }

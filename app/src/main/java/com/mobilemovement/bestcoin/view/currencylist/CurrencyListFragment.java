@@ -22,6 +22,8 @@ import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
 
 import java.util.Objects;
 
+import timber.log.Timber;
+
 /**
  * A simple {@link Fragment} subclass.
  *
@@ -64,15 +66,19 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     @Override
     public void onCurrencyTouch(Result result, ImageView imageView) {
         Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
-        detailsIntent.putExtra("result", result.getLogoUrl());
-        detailsIntent.putExtra("long-name", result.getBaseCurrencyLong());
+        detailsIntent.putExtra("image", String.valueOf(result.getLogoUrl()));
+        detailsIntent.putExtra("long-name", result.getMarketCurrencyLong());
+        detailsIntent.putExtra("short-name", result.getMarketCurrency());
+        detailsIntent.putExtra("market-name", result.getMarketName());
+        detailsIntent.putExtra("is-active", result.getActive());
+
         detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(
-                Objects.requireNonNull(getActivity()),
-                imageView,
-                ViewCompat.getTransitionName(imageView));
+                        Objects.requireNonNull(getActivity()),
+                        imageView,
+                        ViewCompat.getTransitionName(imageView));
         startActivity(detailsIntent, optionsCompat.toBundle());
     }
 
@@ -91,7 +97,7 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
                     mTvLoading.setVisibility(View.GONE);
                 else
                     mPbLoading.setVisibility(View.GONE);
-                    mTvLoading.setVisibility(View.GONE);
+                mTvLoading.setVisibility(View.GONE);
             }
         });
     }

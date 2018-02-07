@@ -32,7 +32,7 @@ public class Result extends BaseObservable {
     @SerializedName("IsSponsored")
     private Object isSponsored;
     @SerializedName("LogoUrl")
-    private String logoUrl;
+    private Object logoUrl;
 
     public Result() {}
 
@@ -151,7 +151,7 @@ public class Result extends BaseObservable {
     }
 
     @Bindable
-    public String getLogoUrl() {
+    public Object getLogoUrl() {
         return logoUrl;
     }
 

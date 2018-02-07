@@ -24,7 +24,7 @@ import timber.log.Timber;
 
 public class FetchCurrencies {
 
-    private static final String BITCOIN_CONDITION = "Tether";
+    private static final String CURRENCY_TYPE_CONDITION = "Bitcoin";
 
     /**
      * @param currencyAdapter   to load data
@@ -64,15 +64,16 @@ public class FetchCurrencies {
 
                         if (marketResponse.getSuccess())
 
-                            for (int i = 0; i < marketResponse.getResult().size(); i++) {
-                                if (marketResponse.getResult().get(i).getBaseCurrencyLong().equals(BITCOIN_CONDITION)) {
+                            for (int i = 0; i < 40; i++) {
+                                if (marketResponse.getResult().get(i).getBaseCurrencyLong().equals(CURRENCY_TYPE_CONDITION)) {
 
                                     Result result = new Result();
 
-                                    result.setLogoUrl(marketResponse.getResult().get(i).getLogoUrl());
+                                    result.setLogoUrl(String.valueOf(marketResponse.getResult().get(i).getLogoUrl()));
                                     result.setMarketCurrency(marketResponse.getResult().get(i).getMarketCurrency());
                                     result.setMarketCurrencyLong(marketResponse.getResult().get(i).getMarketCurrencyLong());
                                     result.setActive(marketResponse.getResult().get(i).getActive());
+                                    result.setMarketName(marketResponse.getResult().get(i).getMarketName());
 
                                     results.add(result);
                                 }

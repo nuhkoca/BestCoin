@@ -19,7 +19,7 @@
     app:headerLayout="@layout/nav_header"
     style="@style/AppTheme.NavigationViewTheme" >
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all_rights_reserved"

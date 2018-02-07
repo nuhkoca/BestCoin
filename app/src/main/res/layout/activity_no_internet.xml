@@ -13,7 +13,7 @@
             android:layout_marginBottom="8dp"
             android:src="@drawable/owl" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_no_connection_short"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_no_connection_long"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:textColor="@color/noInternetTextColor"
             android:textSize="16sp" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_no_connection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
