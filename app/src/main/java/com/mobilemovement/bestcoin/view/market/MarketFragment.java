@@ -22,11 +22,6 @@ public class MarketFragment extends BaseFragment<FragmentMarketBinding> {
     }
 
     @Override
-    public boolean getHasFixedSize() {
-        return false;
-    }
-
-    @Override
     public RecyclerView getRecyclerView() {
         return null;
     }
@@ -39,5 +34,16 @@ public class MarketFragment extends BaseFragment<FragmentMarketBinding> {
     @Override
     protected void initUI() {
 
+    }
+
+    @Override
+    protected boolean performOrientationType() {
+        return true;
+    }
+
+    @Override
+    protected void addExtraToRecyclerview() {
+        //fragmentDataBinding.rvCurrencyItemDetails.setHasFixedSize(true);
+        //fragmentDataBinding.rvCurrencyItemDetails.setNestedScrollingEnabled(false);
     }
 }

@@ -39,9 +39,11 @@
     <string name="info_message">An error occurred. Please check your internet connection and try again.</string>
 
     <!-- Detail Fragment Texts -->
-    <string name="currency_detail_market_currency">Market Currency:</string>
-    <string name="currency_detail_market_name">Market Name:</string>
-    <string name="currency_detail_is_active">Is Active:</string>
+    <string-array name="currency_detail_array">
+        <item name="currency_detail_market_currency">Market Currency:</item>
+        <item name="currency_detail_market_name">Market Name:</item>
+        <item name="currency_detail_is_active">Is Active:</item>
+    </string-array>
 
 
 </resources>

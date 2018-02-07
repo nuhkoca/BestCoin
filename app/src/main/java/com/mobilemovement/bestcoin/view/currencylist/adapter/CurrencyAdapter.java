@@ -77,10 +77,11 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
         void bindViews(Result result) {
             currencyListItemCardViewBinding.setVariable(BR.result, result);
             currencyListItemCardViewBinding.setVariable(BR.touchListener, mAdapterItemTouchListener);
-            currencyListItemCardViewBinding.executePendingBindings();
 
             ViewCompat.setTransitionName(currencyListItemCardViewBinding.ivCurrency,
                     "currency-profile" + getAdapterPosition());
+
+            currencyListItemCardViewBinding.executePendingBindings();
         }
     }
 }

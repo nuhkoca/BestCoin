@@ -38,7 +38,6 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
     protected void initUI() {
         setSupportActionBar(activityDataBinding.toolbarCurrencyDetails);
         TransparentUtils.makeCompleteTransparent(this);
-
         supportPostponeEnterTransition();
 
         ActionBar actionBar = getSupportActionBar();
@@ -52,8 +51,8 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
 
         activityDataBinding.aplCurrencyDetails.setBackgroundResource(R.drawable.currency_background);
 
+        applyImageViewTransition(extras);
         loadCurrencyIcon();
-        applyTransition(extras);
         loadMarketCurrencyLong();
         handleTabLayoutProcess();
     }
@@ -97,7 +96,7 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
 
         if (scrollRange + verticalOffset == 0) {
             activityDataBinding.aplCurrencyDetails.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        } else if (scrollRange + verticalOffset > 50){
+        } else if (scrollRange + verticalOffset > 200) {
             activityDataBinding.aplCurrencyDetails.setBackgroundResource(R.drawable.currency_background);
         }
     }
@@ -139,7 +138,7 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
                 });
     }
 
-    private void loadCurrencyIcon(){
+    private void loadCurrencyIcon() {
         GlideApp.with(this)
                 .asBitmap()
                 .load(loadImageUrl(extras))
@@ -159,20 +158,20 @@ public class CurrencyDetailsActivity extends BaseActivity<ActivityCurrencyDetail
                 }).into(activityDataBinding.ivCurrencyDetailLogo);
     }
 
-    private String loadImageUrl(Bundle extras){
+    private String loadImageUrl(Bundle extras) {
         return extras.getString("image");
     }
 
-    private void applyTransition(Bundle extras){
+    private void applyImageViewTransition(Bundle extras) {
         String imageTransitionName = extras.getString("transition-name");
         Objects.requireNonNull(activityDataBinding).ivCurrencyDetailLogo.setTransitionName(imageTransitionName);
     }
 
-    private void loadMarketCurrencyLong(){
+    private void loadMarketCurrencyLong() {
         activityDataBinding.tvCurrencyDetailCurrencyLongName.setText(extras.getString("long-name"));
     }
 
-    private void handleTabLayoutProcess(){
+    private void handleTabLayoutProcess() {
         activityDataBinding.vpCurrencyDetail.setAdapter(new TabsAdapter(getSupportFragmentManager()));
         activityDataBinding.tlCurrencyDetail.setupWithViewPager(activityDataBinding.vpCurrencyDetail);
         activityDataBinding.tlCurrencyDetail.setTabTextColors(

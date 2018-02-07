@@ -107,8 +107,6 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
     protected abstract int getLayoutId();
 
-    protected abstract boolean getHasFixedSize();
-
     protected abstract RecyclerView getRecyclerView();
 
     protected abstract RecyclerView.Adapter getAdapter();
@@ -120,8 +118,6 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
         mTvLoading = Objects.requireNonNull(getActivity()).findViewById(R.id.tvLoading);
 
         if (getRecyclerView() != null) {
-            getRecyclerView().setNestedScrollingEnabled(false);
-
             switch (getOrientationType()) {
                 case GRID_LAYOUT_ID:
                     mLayoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_layout_column_2));
@@ -138,11 +134,7 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
 
             getRecyclerView().setLayoutManager(mLayoutManager);
 
-            if (getHasFixedSize()) {
-                getRecyclerView().setHasFixedSize(true);
-            } else {
-                getRecyclerView().setHasFixedSize(false);
-            }
+            addExtraToRecyclerview();
 
             if (getAdapter() != null) {
                 getRecyclerView().setAdapter(getAdapter());
@@ -151,18 +143,26 @@ public abstract class BaseFragment<F extends ViewDataBinding> extends Fragment {
     }
 
     private int getOrientationType() {
-        int screenMode = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
+        if (performOrientationType()) {
+            int screenMode = OrientationUtils.detectOrientation(Objects.requireNonNull(getActivity()));
 
-        switch (screenMode) {
-            case 1:
-                orientationType = GRID_LAYOUT_ID;
-                return orientationType;
-            case 2:
-                orientationType = GRID_LAYOUT_LAND_ID;
-                return orientationType;
-            default:
-                orientationType = LINEAR_LAYOUT_ID;
-                return orientationType;
+            switch (screenMode) {
+                case 1:
+                    orientationType = GRID_LAYOUT_ID;
+                    return orientationType;
+                case 2:
+                    orientationType = GRID_LAYOUT_LAND_ID;
+                    return orientationType;
+                default:
+                    orientationType = LINEAR_LAYOUT_ID;
+                    return orientationType;
+            }
         }
+
+        return LINEAR_LAYOUT_ID;
     }
+
+    protected abstract boolean performOrientationType();
+
+    protected abstract void addExtraToRecyclerview();
 }

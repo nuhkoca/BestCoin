@@ -22,8 +22,6 @@ import com.mobilemovement.bestcoin.view.currencylist.network.FetchCurrencies;
 
 import java.util.Objects;
 
-import timber.log.Timber;
-
 /**
  * A simple {@link Fragment} subclass.
  *
@@ -39,11 +37,6 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     @Override
     public int getLayoutId() {
         return R.layout.fragment_currency_list;
-    }
-
-    @Override
-    public boolean getHasFixedSize() {
-        return true;
     }
 
     @Override
@@ -64,13 +57,24 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
     }
 
     @Override
+    protected boolean performOrientationType() {
+        return true;
+    }
+
+    @Override
+    protected void addExtraToRecyclerview() {
+        fragmentDataBinding.rvCoinList.setHasFixedSize(true);
+        fragmentDataBinding.rvCoinList.setNestedScrollingEnabled(false);
+    }
+
+    @Override
     public void onCurrencyTouch(Result result, ImageView imageView) {
         Intent detailsIntent = new Intent(getActivity(), CurrencyDetailsActivity.class);
         detailsIntent.putExtra("image", String.valueOf(result.getLogoUrl()));
         detailsIntent.putExtra("long-name", result.getMarketCurrencyLong());
         detailsIntent.putExtra("short-name", result.getMarketCurrency());
         detailsIntent.putExtra("market-name", result.getMarketName());
-        detailsIntent.putExtra("is-active", result.getActive());
+        detailsIntent.putExtra("is-active", String.valueOf(result.getActive()));
 
         detailsIntent.putExtra("transition-name", ViewCompat.getTransitionName(imageView));
 
@@ -79,6 +83,7 @@ public class CurrencyListFragment extends BaseFragment<FragmentCurrencyListBindi
                         Objects.requireNonNull(getActivity()),
                         imageView,
                         ViewCompat.getTransitionName(imageView));
+
         startActivity(detailsIntent, optionsCompat.toBundle());
     }
 
