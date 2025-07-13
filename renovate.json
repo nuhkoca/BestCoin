@@ -1,8 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "rebaseWhen": "conflicted",
+  "automerge": true,
   "automergeType": "branch",
+  "rebaseWhen": "conflicted",
   "minor": {
     "automerge": true
   },
