@@ -4,6 +4,9 @@
   "automerge": true,
   "automergeType": "branch",
   "rebaseWhen": "conflicted",
+  "major": {
+    "automerge": true
+  },
   "minor": {
     "automerge": true
   },
@@ -15,5 +18,11 @@
   },
   "digest": {
     "automerge": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": ["gradle"],
+      "automerge": true
+    }
+  ]
 }
