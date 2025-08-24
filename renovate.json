@@ -1,12 +1,9 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "automerge": true,
-  "automergeType": "branch",
+  "extends": [
+    "config:base"
+  ],
+  "requiredStatusChecks": null,
   "rebaseWhen": "conflicted",
-  "major": {
-    "automerge": true
-  },
   "minor": {
     "automerge": true
   },
@@ -18,11 +15,5 @@
   },
   "digest": {
     "automerge": true
-  },
-  "packageRules": [
-    {
-      "matchPackageNames": ["gradle"],
-      "automerge": true
-    }
-  ]
+  }
 }
