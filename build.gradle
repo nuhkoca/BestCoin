@@ -27,7 +27,7 @@ ext{
     //dependencies
     supportLibraryVersion = '28.0.0'
     rxJavaLibraryVersion = '3.0.0'
-    glideLibraryVersion = '5.0.7'
+    glideLibraryVersion = '5.0.9'
 }
 
 task clean(type: Delete) {
